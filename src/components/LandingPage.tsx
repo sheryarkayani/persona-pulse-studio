@@ -2,7 +2,7 @@ import Navigation from "./Navigation";
 import Hero from "./Hero";
 import Features from "./Features";
 import TargetAudience from "./TargetAudience";
-import CTA from "./CTA";
+// import CTA from "./CTA"; // Removed CTA import
 
 const LandingPage = () => {
   return (
@@ -11,7 +11,7 @@ const LandingPage = () => {
       <Hero />
       <Features />
       <TargetAudience />
-      <CTA />
+      {/* <CTA /> */} 
       
       {/* Footer */}
       <footer className="bg-gradient-secondary border-t border-border/30 py-12">

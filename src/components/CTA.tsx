@@ -1,139 +1,86 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, CheckCircle, Sparkles, Zap } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import React from "react";
 
-const benefits = [
-  "Save 20+ hours per week on content creation",
-  "Increase engagement by 300% with AI-optimized content", 
-  "Generate qualified leads on autopilot",
-  "Build authority in your niche faster",
-  "Scale your personal brand without burning out"
+const plans = [
+  {
+    name: "Starter Plan",
+    price: "$97",
+    period: "/month",
+    description: "Perfect for solo creators",
+    features: [
+      "Save 20+ hours per week on content creation",
+      "Increase engagement by 300% with AI-optimized content",
+      "Generate qualified leads on autopilot"
+    ],
+    popular: false
+  },
+  {
+    name: "Pro Plan",
+    price: "$197",
+    period: "/month",
+    description: "For scaling entrepreneurs",
+    features: [
+      "Save 20+ hours per week on content creation",
+      "Increase engagement by 300% with AI-optimized content",
+      "Generate qualified leads on autopilot",
+      "Build authority in your niche faster",
+      "Scale your personal brand without burning out"
+    ],
+    popular: true
+  }
 ];
 
-const CTA = () => {
+const PricingPage = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="relative">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-hero rounded-3xl"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-10 rounded-3xl"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 text-center py-16 px-8">
-          <div className="flex items-center justify-center mb-8">
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-yellow-300" />
-              <span className="text-white font-semibold">Limited Time Offer</span>
-            </div>
-          </div>
-          
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            Ready to Transform Your
-            <span className="block bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">
-              Personal Brand?
-            </span>
-          </h2>
-          
-          <p className="text-xl sm:text-2xl text-white/90 mb-12 max-w-4xl mx-auto">
-            Join thousands of creators who've already transformed their brands with AI. 
-            <span className="block mt-2 font-semibold">Your AI employee is waiting.</span>
+    <section className="min-h-screen bg-gradient-to-br from-neutral-50 to-white flex flex-col justify-between">
+      <div className="max-w-4xl mx-auto px-4 py-24 w-full">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl sm:text-6xl font-bold text-foreground mb-4 tracking-tight" style={{letterSpacing: '-0.02em'}}>
+            Ready to Transform Your <span className="block bg-gradient-to-r from-blue-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">Personal Brand?</span>
+          </h1>
+          <p className="text-xl sm:text-2xl text-muted-foreground mb-4 max-w-2xl mx-auto font-medium">
+            Join thousands of creators who've already transformed their brands with AI.<br />
+            <span className="block mt-2 font-semibold text-foreground">Your AI employee is waiting.</span>
           </p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 shadow-glow hover:bg-white/15 transition-all duration-300 group">
-              <CardContent className="p-6">
-                <div className="text-center mb-6">
-                  <Zap className="h-12 w-12 text-yellow-300 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-white mb-2">Starter Plan</h3>
-                  <div className="text-4xl font-bold text-white mb-2">
-                    $97<span className="text-lg text-white/70">/month</span>
-                  </div>
-                  <p className="text-white/80">Perfect for solo creators</p>
-                </div>
-                
-                <ul className="space-y-3 mb-6">
-                  {benefits.slice(0, 3).map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3 text-white/90">
-                      <CheckCircle className="h-5 w-5 text-green-300 mt-0.5 flex-shrink-0" />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <Button variant="hero" size="lg" className="w-full bg-white text-primary hover:bg-white/90">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 relative overflow-hidden shadow-glow hover:bg-white/15 transition-all duration-300 hover:scale-105 group">
-              <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold animate-pulse">
-                POPULAR
-              </div>
-              <CardContent className="p-6">
-                <div className="text-center mb-6">
-                  <Sparkles className="h-12 w-12 text-yellow-300 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-white mb-2">Pro Plan</h3>
-                  <div className="text-4xl font-bold text-white mb-2">
-                    $197<span className="text-lg text-white/70">/month</span>
-                  </div>
-                  <p className="text-white/80">For scaling entrepreneurs</p>
-                </div>
-                
-                <ul className="space-y-3 mb-6">
-                  {benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3 text-white/90">
-                      <CheckCircle className="h-5 w-5 text-green-300 mt-0.5 flex-shrink-0" />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <Button variant="gradient" size="lg" className="w-full">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-          
-          <div className="text-center">
-            <p className="text-white/70 mb-4">
-              🎯 14-day free trial • No credit card required • Cancel anytime
-            </p>
-            <p className="text-white/60">
-              Join 10,000+ creators already using Repic AI
-            </p>
-          </div>
         </div>
-      </div>
-      
-      {/* Stats section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-        <Card className="text-center bg-white border-border/30 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1 group">
-          <CardContent className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">10,000+</div>
-            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">Active Creators</p>
-          </CardContent>
-        </Card>
-        
-        <Card className="text-center bg-white border-border/30 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1 group">
-          <CardContent className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">5M+</div>
-            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">Content Pieces Created</p>
-          </CardContent>
-        </Card>
-        
-        <Card className="text-center bg-white border-border/30 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1 group">
-          <CardContent className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">300%</div>
-            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">Average Engagement Increase</p>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {plans.map((plan, idx) => (
+            <Card key={plan.name} className={`relative bg-white/80 border-none shadow-xl rounded-3xl p-8 flex flex-col items-center text-center transition-all duration-300 ${plan.popular ? 'ring-2 ring-primary/60 scale-105 z-10' : ''}`}>  
+              {plan.popular && (
+                <span className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-500 to-fuchsia-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg tracking-wide" style={{letterSpacing: '0.08em'}}>POPULAR</span>
+              )}
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold mb-1 tracking-tight">{plan.name}</h2>
+                <div className="text-4xl font-extrabold mb-1">{plan.price}<span className="text-lg font-medium text-muted-foreground">{plan.period}</span></div>
+                <div className="text-base text-muted-foreground mb-2">{plan.description}</div>
+              </div>
+              <ul className="space-y-3 mb-8 w-full">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-foreground/90 text-base font-medium justify-center">
+                    <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button variant="hero" size="lg" className="w-full max-w-xs bg-black text-white hover:bg-neutral-900 rounded-xl text-lg font-semibold shadow-md transition-all duration-200">
+                Start Free Trial
+              </Button>
+            </Card>
+          ))}
+        </div>
+        <div className="text-center text-muted-foreground text-base mb-4">
+          <span className="inline-block bg-neutral-100 rounded-full px-4 py-2 font-medium">🎯 14-day free trial • No credit card required • Cancel anytime</span>
+        </div>
+        <div className="text-center mt-8">
+          <p className="text-lg font-semibold text-primary/90">
+            Join 10,000+ creators already using Repic AI
+          </p>
+        </div>
       </div>
     </section>
   );
 };
 
-export default CTA;
+export default PricingPage;

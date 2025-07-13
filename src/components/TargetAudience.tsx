@@ -85,10 +85,10 @@ const TargetAudience = () => {
         {audiences.map((audience, index) => {
           const Icon = audience.icon;
           return (
-            <Card key={index} className="group hover:shadow-soft transition-all duration-300 hover:-translate-y-1 bg-white border-border/30 shadow-sm">
+            <Card key={index} className="group hover:shadow-hover transition-spring hover:-translate-y-2 bg-white border-border/30 shadow-card hover:border-primary/20">
               <CardContent className="p-6">
-                <div className={`w-12 h-12 rounded-lg ${audience.color} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className="h-6 w-6 text-white" />
+                <div className={`w-12 h-12 rounded-lg ${audience.color} p-3 mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-soft`}>
+                  <Icon className="h-6 w-6 text-white group-hover:animate-pulse" />
                 </div>
                 
                 <h3 className="text-xl font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors">
@@ -112,7 +112,7 @@ const TargetAudience = () => {
         })}
       </div>
       
-      <div className="bg-gradient-secondary rounded-2xl p-8 border border-border/30 shadow-soft">
+      <div className="bg-gradient-secondary rounded-2xl p-8 border border-border/30 shadow-card hover:shadow-hover transition-all duration-300 group">
         <div className="text-center mb-8">
           <h3 className="text-2xl font-bold text-foreground mb-4">
             Sound Like You?

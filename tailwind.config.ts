@@ -67,15 +67,19 @@ export default {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-secondary': 'var(--gradient-secondary)',
 				'gradient-hero': 'var(--gradient-hero)',
-				'gradient-background': 'var(--gradient-background)'
+				'gradient-background': 'var(--gradient-background)',
+				'gradient-mesh': 'var(--gradient-mesh)'
 			},
 			boxShadow: {
 				'primary': 'var(--shadow-primary)',
 				'glow': 'var(--shadow-glow)',
-				'soft': 'var(--shadow-soft)'
+				'soft': 'var(--shadow-soft)',
+				'card': 'var(--shadow-card)',
+				'hover': 'var(--shadow-hover)'
 			},
 			transitionTimingFunction: {
-				'smooth': 'var(--transition-smooth)'
+				'smooth': 'var(--transition-smooth)',
+				'spring': 'var(--transition-spring)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

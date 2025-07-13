@@ -15,7 +15,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-border/30 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-border/30 shadow-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -43,10 +43,10 @@ const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost">
+            <Button variant="ghost" className="hover:scale-105 transition-spring">
               Sign In
             </Button>
-            <Button variant="hero">
+            <Button variant="hero" className="hover:scale-105 transition-spring">
               Start Free Trial
             </Button>
           </div>

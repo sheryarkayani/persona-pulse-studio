@@ -40,7 +40,7 @@ const CTA = () => {
           </p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 shadow-glow">
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 shadow-glow hover:bg-white/15 transition-all duration-300 group">
               <CardContent className="p-6">
                 <div className="text-center mb-6">
                   <Zap className="h-12 w-12 text-yellow-300 mx-auto mb-4" />
@@ -67,8 +67,8 @@ const CTA = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 relative overflow-hidden shadow-glow">
-              <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 relative overflow-hidden shadow-glow hover:bg-white/15 transition-all duration-300 hover:scale-105 group">
+              <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold animate-pulse">
                 POPULAR
               </div>
               <CardContent className="p-6">
@@ -111,24 +111,24 @@ const CTA = () => {
       
       {/* Stats section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-        <Card className="text-center bg-white border-border/30 shadow-soft">
+        <Card className="text-center bg-white border-border/30 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1 group">
           <CardContent className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2">10,000+</div>
-            <p className="text-muted-foreground">Active Creators</p>
+            <div className="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">10,000+</div>
+            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">Active Creators</p>
           </CardContent>
         </Card>
         
-        <Card className="text-center bg-white border-border/30 shadow-soft">
+        <Card className="text-center bg-white border-border/30 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1 group">
           <CardContent className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2">5M+</div>
-            <p className="text-muted-foreground">Content Pieces Created</p>
+            <div className="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">5M+</div>
+            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">Content Pieces Created</p>
           </CardContent>
         </Card>
         
-        <Card className="text-center bg-white border-border/30 shadow-soft">
+        <Card className="text-center bg-white border-border/30 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1 group">
           <CardContent className="p-6">
-            <div className="text-3xl font-bold text-primary mb-2">300%</div>
-            <p className="text-muted-foreground">Average Engagement Increase</p>
+            <div className="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">300%</div>
+            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">Average Engagement Increase</p>
           </CardContent>
         </Card>
       </div>

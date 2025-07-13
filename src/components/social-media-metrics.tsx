@@ -44,29 +44,29 @@ const platforms = [
 
 export function SocialMediaMetrics() {
   return (
-    <Card>
+    <Card className="bg-gradient-to-br from-white via-[#f5faff] to-[#eaf2ff] shadow-2xl rounded-3xl border-0 p-6">
       <CardHeader>
-        <CardTitle>Social Media Performance</CardTitle>
-        <CardDescription>Your presence across different platforms</CardDescription>
+        <CardTitle className="text-2xl font-extrabold bg-gradient-to-r from-[#2563eb] to-[#38b6ff] bg-clip-text text-transparent" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Social Media Performance</CardTitle>
+        <CardDescription className="text-base text-gray-600 mt-1" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Your presence across different platforms</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6 pt-2">
         {platforms.map((platform) => {
           const Icon = platform.icon
           return (
-            <div key={platform.name} className="flex items-center justify-between p-3 rounded-lg border">
+            <div key={platform.name} className="flex items-center justify-between p-4 rounded-2xl bg-white/90 shadow-md">
               <div className="flex items-center gap-3">
-                <div className={`p-2 rounded-lg ${platform.color}`}>
-                  <Icon className="h-4 w-4 text-white" />
+                <div className={`p-3 rounded-xl ${platform.color} shadow-lg`}>
+                  <Icon className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <div className="font-medium">{platform.name}</div>
-                  <div className="text-sm text-muted-foreground">{platform.followers} followers</div>
+                  <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>{platform.name}</div>
+                  <div className="text-sm text-gray-500">{platform.followers} followers</div>
                 </div>
               </div>
               <div className="text-right space-y-1">
-                <Badge variant="secondary">{platform.growth}</Badge>
-                <div className="text-sm text-muted-foreground">{platform.engagement}% engagement</div>
-                <Progress value={platform.engagement * 10} className="w-16 h-1" />
+                <Badge variant="secondary" className="font-semibold text-blue-700 bg-blue-50 border-0 px-3 py-1 rounded-full">{platform.growth}</Badge>
+                <div className="text-sm text-gray-500">{platform.engagement}% engagement</div>
+                <Progress value={platform.engagement * 10} className="w-20 h-1 bg-blue-100" />
               </div>
             </div>
           )

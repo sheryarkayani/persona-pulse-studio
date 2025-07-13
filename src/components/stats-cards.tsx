@@ -99,7 +99,7 @@ function useCountUp(target: number, duration = 1000) {
 
 export function StatsCards() {
   return (
-    <div className="flex flex-col md:flex-row gap-4 w-full">
+    <div className="flex flex-col md:flex-row gap-6 w-full bg-gradient-to-br from-white via-[#f5faff] to-[#eaf2ff] rounded-3xl p-6 shadow-2xl">
       {stats.map((stat) => {
         const Icon = stat.icon
         let displayValue: string | number = stat.display
@@ -118,24 +118,25 @@ export function StatsCards() {
         return (
           <div
             key={stat.title}
-            className={`flex-1 flex flex-col justify-between rounded-xl shadow-sm ${stat.color} p-5 min-w-[160px] transition-transform hover:scale-[1.03] hover:shadow-md active:scale-100 cursor-pointer`}
+            className={`flex-1 flex flex-col justify-between rounded-2xl bg-white shadow-xl p-6 min-w-[180px] transition-transform hover:scale-[1.04] hover:shadow-2xl active:scale-100 cursor-pointer border-0`}
+            style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
           >
-            <div className="flex items-center justify-between mb-2">
-              <div className="text-lg font-semibold">{stat.title}</div>
-              <div className={`rounded-full ${stat.iconBg} p-2 flex items-center justify-center`}>
-                <Icon className={`w-6 h-6 ${stat.iconColor}`} />
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-lg font-semibold text-gray-700">{stat.title}</div>
+              <div className={`rounded-xl ${stat.iconBg} p-3 flex items-center justify-center shadow-md`}>
+                <Icon className={`w-7 h-7 ${stat.iconColor}`} />
               </div>
             </div>
-            <div className="flex items-center gap-2 mb-1 min-w-0">
-              <span className="text-3xl md:text-4xl font-extrabold tracking-tight truncate max-w-full">
+            <div className="flex items-center gap-2 mb-2 min-w-0">
+              <span className="text-4xl md:text-5xl font-extrabold tracking-tight truncate max-w-full bg-gradient-to-r from-[#2563eb] to-[#38b6ff] bg-clip-text text-transparent">
                 {displayValue}
               </span>
-              {stat.trend === "up" && <TrendingUp className="w-4 h-4 text-green-500" />}
-              {stat.trend === "down" && <TrendingDown className="w-4 h-4 text-red-500" />}
+              {stat.trend === "up" && <TrendingUp className="w-5 h-5 text-green-500" />}
+              {stat.trend === "down" && <TrendingDown className="w-5 h-5 text-red-500" />}
             </div>
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-base mt-1">
               <span className={`font-bold ${stat.trend === "up" ? "text-green-600" : "text-red-600"}`}>{stat.change}</span>
-              <span className="opacity-80">{stat.description}</span>
+              <span className="opacity-80 text-gray-500">{stat.description}</span>
             </div>
           </div>
         )

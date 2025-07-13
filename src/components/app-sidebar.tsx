@@ -110,49 +110,58 @@ const menuItems = [
 export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(false)
   return (
-    <Sidebar className="bg-gradient-to-b from-white/80 via-blue-50/80 to-fuchsia-100/80 glass-morphism shadow-2xl border-none min-h-screen transition-all duration-300">
+    <Sidebar
+      className="fixed top-0 left-0 h-screen z-30 bg-gradient-to-b from-white via-[#f5faff] to-[#eaf2ff] shadow-2xl border-none transition-all duration-300 rounded-r-3xl ml-0 w-auto"
+      style={{ minWidth: collapsed ? '5rem' : '16rem', maxWidth: collapsed ? '5rem' : '16rem' }}
+    >
+      {/* Subtle mesh/radial gradient background, no harsh floating shapes */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,#2563eb11_0%,#38b6ff09_60%,transparent_100%)]" style={{filter:'blur(12px)'}} />
+      </div>
       {/* Collapse/Expand Button */}
-      <div className="flex items-center justify-between px-4 pt-4 pb-2">
+      <div className="flex items-center justify-between px-4 pt-4 pb-2 relative z-10">
         <SidebarHeader className="border-none bg-transparent p-0">
           <div className="flex items-center gap-3">
             <img
               src="/lovable-uploads/5e2c30b7-efa0-48d1-8a0a-a1687293f1c5.png"
               alt="Repic AI Logo"
-              className="h-10 w-10 rounded-lg bg-white shadow-md"
+              className="h-10 w-10 rounded-lg bg-white shadow-md object-contain p-1"
             />
             {!collapsed && (
               <div className="flex flex-col">
-                <span className="text-xl font-extrabold text-foreground tracking-tight">Repic AI</span>
-                <span className="text-xs text-muted-foreground">Personal Branding</span>
+                <span className="text-xl font-extrabold text-gray-900 tracking-tight" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Repic AI</span>
+                <span className="text-xs text-gray-400" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Personal Branding</span>
               </div>
             )}
           </div>
         </SidebarHeader>
         <button
-          className="rounded-full p-1 bg-white/80 shadow hover:bg-blue-100 transition ml-2"
+          className="rounded-full p-1 bg-white/80 shadow hover:bg-blue-100 transition ml-2 border border-blue-100"
           onClick={() => setCollapsed((c) => !c)}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
         </button>
       </div>
-      <SidebarContent className={`pt-4 transition-all duration-300 ${collapsed ? 'w-20' : 'w-60'}`}>
+      <SidebarContent className={`pt-4 transition-all duration-300 ${collapsed ? 'w-20' : 'w-60'} relative z-10`}>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground font-semibold tracking-wide uppercase text-xs mb-2 pl-2">Platform</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-gray-400 font-semibold tracking-wide uppercase text-xs mb-2 pl-2" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Platform</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => {
                 const Icon = item.icon
+                const isActive = item.title === "Dashboard"
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
                       asChild
-                      isActive={item.title === "Dashboard"}
-                      className={`group flex items-center gap-3 rounded-full px-3 py-3 my-1 transition-all duration-200 text-base font-medium ${item.title === "Dashboard" ? "bg-gradient-to-r from-blue-500 to-fuchsia-500 text-white shadow-lg" : "hover:bg-blue-100/60 hover:shadow-md"} ${collapsed ? 'justify-center px-0' : ''}`}
+                      isActive={isActive}
+                      className={`group flex items-center gap-3 rounded-2xl px-4 py-3 my-2 transition-all duration-200 text-base font-semibold ${isActive ? "bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white shadow-xl" : "bg-white hover:bg-blue-50/60 hover:shadow-md text-gray-900"} ${collapsed ? 'justify-center px-0' : ''}`}
+                      style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
                     >
                       <a href={item.url} className="flex items-center gap-3 w-full">
                         <Icon className={`h-6 w-6 ${item.color} group-hover:scale-110 group-hover:drop-shadow transition-transform duration-200`} />
-                        {!collapsed && <span className="font-medium text-base">{item.title}</span>}
+                        {!collapsed && <span className={`font-semibold text-base ${isActive ? 'bg-gradient-to-r from-[#2563eb] to-[#38b6ff] bg-clip-text text-transparent' : ''}`} style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>{item.title}</span>}
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -162,8 +171,8 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t-0 bg-transparent mt-auto pb-6 px-4">
-        <div className={`flex items-center gap-3 rounded-2xl bg-white/80 shadow-lg p-3 ${collapsed ? 'justify-center' : ''}`}>
+      <SidebarFooter className="border-t-0 bg-transparent mt-auto pb-6 px-4 relative z-10">
+        <div className={`flex items-center gap-3 rounded-2xl bg-white/90 shadow-lg p-4 ${collapsed ? 'justify-center' : ''}`} style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
           <div className="relative">
             <Avatar className="h-10 w-10">
               <AvatarImage src="/placeholder.svg?height=40&width=40" />
@@ -174,8 +183,8 @@ export function AppSidebar() {
           </div>
           {!collapsed && (
             <div className="flex flex-col text-left">
-              <span className="text-base font-semibold text-foreground">Javeria</span>
-              <span className="text-xs text-muted-foreground">Pro Plan</span>
+              <span className="text-base font-semibold text-gray-900">Javeria</span>
+              <span className="text-xs text-gray-400">Pro Plan</span>
             </div>
           )}
         </div>

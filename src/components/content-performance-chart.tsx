@@ -34,18 +34,18 @@ const chartConfig = {
 
 export function ContentPerformanceChart() {
   return (
-    <Card className="bg-gradient-to-br from-white/90 via-blue-50/80 to-fuchsia-50/80 shadow-xl rounded-2xl border-0">
-      <CardHeader className="flex flex-row items-center gap-3 pb-2">
-        <div className="bg-indigo-500/90 p-2 rounded-lg shadow">
-          <BarChart3 className="w-6 h-6 text-white" />
+    <Card className="bg-gradient-to-br from-white via-[#f5faff] to-[#eaf2ff] shadow-2xl rounded-3xl border-0 p-6">
+      <CardHeader className="flex flex-row items-center gap-4 pb-2">
+        <div className="bg-gradient-to-br from-[#2563eb] to-[#38b6ff] p-3 rounded-xl shadow-lg">
+          <BarChart3 className="w-7 h-7 text-white" />
         </div>
         <div>
-          <CardTitle className="text-lg font-bold">Content Performance</CardTitle>
-          <CardDescription className="text-sm">Your content creation and engagement metrics over time</CardDescription>
+          <CardTitle className="text-2xl font-extrabold bg-gradient-to-r from-[#2563eb] to-[#38b6ff] bg-clip-text text-transparent" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Content Performance</CardTitle>
+          <CardDescription className="text-base text-gray-600 mt-1" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Your content creation and engagement metrics over time</CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="pt-2">
-        <div className="bg-white/80 rounded-xl shadow-inner p-4">
+      <CardContent className="pt-4">
+        <div className="bg-white/90 rounded-2xl shadow-inner p-6">
           <ResponsiveContainer width="100%" height={280}>
             <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
@@ -66,7 +66,7 @@ export function ContentPerformanceChart() {
               <XAxis dataKey="month" stroke="#a1a1aa" fontSize={12} />
               <YAxis stroke="#a1a1aa" fontSize={12} />
               <Tooltip />
-              <Legend iconType="circle" formatter={(value) => <span className="text-xs text-gray-700 font-semibold">{chartConfig[value]?.label || value}</span>} />
+              <Legend iconType="circle" formatter={(value) => <span className="text-xs text-gray-700 font-semibold" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>{chartConfig[value]?.label || value}</span>} />
               <Area type="monotone" dataKey="reach" stroke={chartConfig.reach.color} fill={chartConfig.reach.gradient} fillOpacity={1} strokeWidth={3} isAnimationActive={true} />
               <Area type="monotone" dataKey="engagement" stroke={chartConfig.engagement.color} fill={chartConfig.engagement.gradient} fillOpacity={1} strokeWidth={3} isAnimationActive={true} />
               <Area type="monotone" dataKey="posts" stroke={chartConfig.posts.color} fill={chartConfig.posts.gradient} fillOpacity={1} strokeWidth={3} isAnimationActive={true} />

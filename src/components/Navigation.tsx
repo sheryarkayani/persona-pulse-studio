@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -43,7 +45,7 @@ const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="hover:scale-105 transition-spring">
+            <Button variant="ghost" className="hover:scale-105 transition-spring" onClick={() => navigate("/dashboard")}> 
               Sign In
             </Button>
             <Button variant="hero" className="hover:scale-105 transition-spring">
@@ -78,7 +80,7 @@ const Navigation = () => {
               </a>
             ))}
             <div className="px-4 space-y-2">
-              <Button variant="ghost" className="w-full justify-start">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => { setIsMenuOpen(false); navigate("/dashboard"); }}>
                 Sign In
               </Button>
               <Button variant="hero" className="w-full">

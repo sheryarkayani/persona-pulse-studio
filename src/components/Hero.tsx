@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Zap } from "lucide-react";
-import dashboardPreview from "@/assets/dashboard-preview.jpg";
 
 const Hero = () => {
   return (
@@ -59,7 +58,7 @@ const Hero = () => {
             <div className="absolute inset-0 bg-gradient-primary/20 rounded-2xl blur-2xl group-hover:blur-xl transition-all duration-500"></div>
             <div className="absolute inset-0 bg-gradient-hero/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <img 
-              src={dashboardPreview}
+              src="/lovable-uploads/ss01.png"
               alt="Repic AI Dashboard Preview" 
               className="relative rounded-2xl shadow-2xl border border-border/30 w-full group-hover:scale-[1.02] transition-transform duration-500 hover:shadow-glow"
             />

@@ -17,9 +17,9 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-border/30 shadow-card">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-blue-100">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img 
@@ -27,16 +27,17 @@ const Navigation = () => {
               alt="Repic AI" 
               className="h-8 w-auto"
             />
-            <span className="text-xl font-bold text-foreground">Repic AI</span>
+            <span className="font-extrabold text-2xl text-gray-900" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Repic AI</span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-gray-700 font-semibold hover:text-[#2563eb] transition text-lg"
+                style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
               >
                 {item.label}
               </a>
@@ -45,12 +46,15 @@ const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="hover:scale-105 transition-spring" onClick={() => navigate("/dashboard")}> 
+            <Button variant="ghost" className="hover:scale-105 transition-spring font-semibold text-gray-700 text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }} onClick={() => navigate("/dashboard")}> 
               Sign In
             </Button>
-            <Button variant="hero" className="hover:scale-105 transition-spring">
+            <a href="#" className="bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white font-semibold rounded-full px-7 py-3 shadow-lg flex items-center gap-2 hover:scale-105 transition-transform text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
               Start Free Trial
-            </Button>
+              <span className="bg-white rounded-full p-1 ml-1 flex items-center justify-center">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </span>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -59,7 +63,7 @@ const Navigation = () => {
               variant="ghost"
               size="icon"
               onClick={toggleMenu}
-              className="text-foreground"
+              className="text-gray-900"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -68,24 +72,28 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-border/50">
+          <div className="md:hidden py-4 space-y-4 border-t border-blue-100 bg-white/95 backdrop-blur-md shadow-lg rounded-b-2xl">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="block px-4 py-2 text-foreground hover:text-primary transition-colors font-medium"
+                className="block px-4 py-2 text-gray-700 font-semibold hover:text-[#2563eb] transition text-lg"
+                style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
               </a>
             ))}
             <div className="px-4 space-y-2">
-              <Button variant="ghost" className="w-full justify-start" onClick={() => { setIsMenuOpen(false); navigate("/dashboard"); }}>
+              <Button variant="ghost" className="w-full justify-start font-semibold text-gray-700 text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }} onClick={() => { setIsMenuOpen(false); navigate("/dashboard"); }}>
                 Sign In
               </Button>
-              <Button variant="hero" className="w-full">
+              <a href="#" className="w-full flex items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white font-semibold rounded-full px-7 py-3 shadow-lg hover:scale-105 transition-transform text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
                 Start Free Trial
-              </Button>
+                <span className="bg-white rounded-full p-1 ml-1 flex items-center justify-center">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </span>
+              </a>
             </div>
           </div>
         )}

@@ -34,35 +34,31 @@ export default function SoundLikeYou({ painPoints = defaultPainPoints }: SoundLi
   }, []);
 
   return (
-    <section className="relative py-24 px-0 w-full bg-gradient-to-br from-blue-50 via-blue-100 to-cyan-100 overflow-visible">
-      <div className="absolute inset-0 opacity-40 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-200/30 via-transparent to-cyan-200/30"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(37,99,235,0.10),transparent_60%)]"></div>
+    <section className="relative py-28 px-0 w-full bg-gradient-to-br from-white via-[#f5faff] to-[#eaf2ff] overflow-visible">
+      {/* Subtle mesh/radial gradient background, no harsh floating shapes */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,#2563eb11_0%,#38b6ff09_60%,transparent_100%)]" style={{filter:'blur(12px)'}} />
       </div>
       <div className="relative z-10 w-full flex justify-center">
-        <div className="bg-white/90 rounded-2xl p-10 border border-blue-200 shadow-lg group w-full max-w-4xl px-4 sm:px-8 lg:px-16 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-400/30 hover:ring-2 hover:ring-blue-300/60 hover:ring-offset-2"
-          style={{
-            animation: `fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both`,
-            animationDelay: `0.2s`,
-            animationFillMode: 'both',
-          }}
-        >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-3 tracking-tight">Sound Like You?</h3>
-            <p className="text-lg text-blue-900/90 font-medium">
+        <div className="bg-white rounded-3xl p-12 shadow-2xl group w-full max-w-4xl transition-all duration-300 hover:shadow-blue-400/30 hover:-translate-y-2 hover:scale-105">
+          <div className="text-center mb-10">
+            <h3 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
+              <span className="bg-gradient-to-r from-[#2563eb] to-[#38b6ff] bg-clip-text text-transparent">Sound Like You?</span>
+            </h3>
+            <p className="text-lg text-gray-700 font-medium mt-2">
               You're in the right place if you identify with these challenges:
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {painPoints.map((point, index) => (
               <div key={index} className="flex items-start gap-4">
-                <div className="w-3 h-3 rounded-full bg-blue-700 mt-2 flex-shrink-0 shadow-md animate-pulse-dot" style={{ animation: 'pulseDot 1.5s infinite' }}></div>
+                <div className="w-3 h-3 rounded-full bg-gradient-to-br from-[#2563eb] to-[#38b6ff] mt-2 flex-shrink-0 shadow-md animate-pulse-dot" style={{ animation: 'pulseDot 1.5s infinite' }}></div>
                 <p className="text-blue-900 font-medium text-lg leading-relaxed">{point}</p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <p className="text-xl font-semibold text-blue-700">
+          <div className="text-center mt-12">
+            <p className="text-xl font-semibold bg-gradient-to-r from-[#2563eb] to-[#38b6ff] bg-clip-text text-transparent">
               Let AI handle the heavy lifting while you focus on what you do best! 🚀
             </p>
           </div>

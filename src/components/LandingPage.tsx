@@ -2,6 +2,7 @@ import Navigation from "./Navigation";
 import Hero from "./Hero";
 import Features from "./Features";
 import TargetAudience from "./TargetAudience";
+import SoundLikeYou from "./SoundLikeYou";
 // import CTA from "./CTA"; // Removed CTA import
 
 const LandingPage = () => {
@@ -11,6 +12,7 @@ const LandingPage = () => {
       <Hero />
       <Features />
       <TargetAudience />
+      <SoundLikeYou />
       {/* <CTA /> */} 
       
       {/* Footer */}

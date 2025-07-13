@@ -91,9 +91,9 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-background">
       <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 bg-gradient-secondary rounded-full px-6 py-2 mb-6">
+        <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-6 py-3 mb-6">
           <Zap className="h-4 w-4 text-primary" />
           <span className="text-primary font-semibold">All-in-One Platform</span>
         </div>
@@ -115,7 +115,7 @@ const Features = () => {
           return (
             <Card 
               key={index} 
-              className="group hover:shadow-primary/20 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm"
+              className="group hover:shadow-soft transition-all duration-300 hover:-translate-y-1 border-border/30 bg-white shadow-sm"
             >
               <CardHeader>
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.gradient} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -136,7 +136,7 @@ const Features = () => {
       </div>
       
       <div className="text-center mt-16">
-        <div className="bg-gradient-secondary rounded-2xl p-8 border border-border/50">
+        <div className="bg-white rounded-2xl p-8 border border-border/30 shadow-soft">
           <h3 className="text-2xl font-bold text-foreground mb-4">
             Like Flozy for Service Businesses, but for Personal Brands
           </h3>

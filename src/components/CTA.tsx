@@ -15,7 +15,7 @@ const CTA = () => {
     <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="relative">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-hero rounded-3xl opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-hero rounded-3xl"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-10 rounded-3xl"></div>
         
         {/* Content */}
@@ -40,7 +40,7 @@ const CTA = () => {
           </p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 shadow-glow">
               <CardContent className="p-6">
                 <div className="text-center mb-6">
                   <Zap className="h-12 w-12 text-yellow-300 mx-auto mb-4" />
@@ -67,7 +67,7 @@ const CTA = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 relative overflow-hidden">
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 relative overflow-hidden shadow-glow">
               <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">
                 POPULAR
               </div>
@@ -111,21 +111,21 @@ const CTA = () => {
       
       {/* Stats section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-        <Card className="text-center bg-card/50 backdrop-blur-sm border-border/50">
+        <Card className="text-center bg-white border-border/30 shadow-soft">
           <CardContent className="p-6">
             <div className="text-3xl font-bold text-primary mb-2">10,000+</div>
             <p className="text-muted-foreground">Active Creators</p>
           </CardContent>
         </Card>
         
-        <Card className="text-center bg-card/50 backdrop-blur-sm border-border/50">
+        <Card className="text-center bg-white border-border/30 shadow-soft">
           <CardContent className="p-6">
             <div className="text-3xl font-bold text-primary mb-2">5M+</div>
             <p className="text-muted-foreground">Content Pieces Created</p>
           </CardContent>
         </Card>
         
-        <Card className="text-center bg-card/50 backdrop-blur-sm border-border/50">
+        <Card className="text-center bg-white border-border/30 shadow-soft">
           <CardContent className="p-6">
             <div className="text-3xl font-bold text-primary mb-2">300%</div>
             <p className="text-muted-foreground">Average Engagement Increase</p>

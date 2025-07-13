@@ -64,7 +64,7 @@ const painPoints = [
 
 const TargetAudience = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-secondary/30">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
       <div className="text-center mb-16">
         <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-6 py-2 mb-6">
           <Users className="h-4 w-4 text-primary" />
@@ -85,7 +85,7 @@ const TargetAudience = () => {
         {audiences.map((audience, index) => {
           const Icon = audience.icon;
           return (
-            <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-card/50 backdrop-blur-sm border-border/50">
+            <Card key={index} className="group hover:shadow-soft transition-all duration-300 hover:-translate-y-1 bg-white border-border/30 shadow-sm">
               <CardContent className="p-6">
                 <div className={`w-12 h-12 rounded-lg ${audience.color} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <Icon className="h-6 w-6 text-white" />
@@ -112,7 +112,7 @@ const TargetAudience = () => {
         })}
       </div>
       
-      <div className="bg-card rounded-2xl p-8 border border-border/50 shadow-lg">
+      <div className="bg-gradient-secondary rounded-2xl p-8 border border-border/30 shadow-soft">
         <div className="text-center mb-8">
           <h3 className="text-2xl font-bold text-foreground mb-4">
             Sound Like You?

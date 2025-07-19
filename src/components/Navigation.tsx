@@ -46,7 +46,7 @@ const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="hover:scale-105 transition-spring font-semibold text-gray-700 text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }} onClick={() => navigate("/dashboard")}> 
+            <Button variant="ghost" className="hover:scale-105 transition-spring font-semibold text-gray-700 text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }} onClick={() => navigate("/login")}> 
               Sign In
             </Button>
             <a href="#" className="bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white font-semibold rounded-full px-7 py-3 shadow-lg flex items-center gap-2 hover:scale-105 transition-transform text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
@@ -85,7 +85,7 @@ const Navigation = () => {
               </a>
             ))}
             <div className="px-4 space-y-2">
-              <Button variant="ghost" className="w-full justify-start font-semibold text-gray-700 text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }} onClick={() => { setIsMenuOpen(false); navigate("/dashboard"); }}>
+              <Button variant="ghost" className="w-full justify-start font-semibold text-gray-700 text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }} onClick={() => { setIsMenuOpen(false); navigate("/login"); }}>
                 Sign In
               </Button>
               <a href="#" className="w-full flex items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white font-semibold rounded-full px-7 py-3 shadow-lg hover:scale-105 transition-transform text-lg" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>

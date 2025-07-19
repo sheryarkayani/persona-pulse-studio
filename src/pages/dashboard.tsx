@@ -9,8 +9,28 @@ import { SocialMediaMetrics } from "@/components/social-media-metrics"
 import { AIUsageStats } from "@/components/ai-usage-stats"
 import { CompetitorInsights } from "@/components/competitor-insights"
 import { Plus, Download, BarChart3, PieChart, Users } from "lucide-react"
+import { useEffect } from "react"
+import { supabase } from "../supabase"
+import { useNavigate } from "react-router-dom"
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/login');
+  };
+
+  useEffect(() => {
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate('/login');
+      }
+    };
+    getSession();
+  }, [navigate]);
+
   return (
     <DashboardLayout>
       <div className="max-w-none w-full mx-auto space-y-10 min-h-screen pb-16 px-2 md:px-8 bg-gradient-to-br from-white via-[#f5faff] to-[#eaf2ff] relative overflow-x-hidden">
@@ -37,6 +57,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap gap-3 items-center mb-10">
           <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white font-semibold shadow-lg hover:scale-105 transition-transform" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}><Plus className="w-4 h-4" /> Add Post</button>
           <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-blue-600 font-semibold border border-blue-100 shadow hover:bg-blue-50 transition" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}><Download className="w-4 h-4" /> Export Data</button>
+          <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Logout</button>
         </div>
 
         {/* Charts Grid */}

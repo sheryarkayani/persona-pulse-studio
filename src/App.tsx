@@ -14,6 +14,7 @@ import Integrations from "./pages/Integrations";
 import Community from "./pages/Community";
 import Workflow from "./pages/Workflow";
 import Insights from "./pages/Insights";
+import TemplatesPage from "./pages/Templates";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/community" element={<Community />} />
           <Route path="/workflow" element={<Workflow />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/templates" element={<TemplatesPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

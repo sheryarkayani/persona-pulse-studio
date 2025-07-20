@@ -17,6 +17,7 @@ import {
   Shuffle,
   MessageCircle,
   Kanban,
+  LayoutGrid,
 } from "lucide-react"
 
 import {
@@ -56,9 +57,9 @@ const menuItems = [
     color: "text-green-500",
   },
   {
-    title: "Audience",
-    url: "#",
-    icon: Users,
+    title: "Plug & Play Templates",
+    url: "/templates",
+    icon: LayoutGrid,
     color: "text-cyan-500",
   },
   {

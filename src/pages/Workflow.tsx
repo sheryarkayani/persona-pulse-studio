@@ -45,7 +45,7 @@ interface Task {
     completed: number;
     total: number;
   };
-  status: 'todo' | 'doing' | 'done';
+  status: 'outbound' | 'negotiation' | 'contract' | 'pre-production' | 'filming' | 'payment';
 }
 
 interface Column {
@@ -64,143 +64,155 @@ const Workflow = () => {
 
   const [columns, setColumns] = useState<Column[]>([
     {
-      id: 'todo',
-      title: 'To Do',
-      color: 'text-gray-600',
-      bgColor: 'bg-gray-100',
-      icon: <Circle className="w-5 h-5" />,
+      id: 'outbound',
+      title: 'Outbound',
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-100',
+      icon: <Target className="w-5 h-5" />,
       tasks: [
         {
           id: '1',
-          title: 'Create Instagram Content Calendar',
-          description: 'Plan and schedule Instagram posts for the next month with AI-generated content suggestions',
-          priority: 'high',
-          assignee: { name: 'Sarah Chen', avatar: '👩‍💼' },
-          dueDate: '2024-01-25',
-          tags: ['Content', 'Instagram', 'AI'],
-          attachments: 3,
-          comments: 2,
-          checklist: { completed: 2, total: 5 },
-          status: 'todo'
+          title: 'Research 10 Tech Gadget Brands',
+          description: 'Identify brands aligning with channel audience for potential partnerships.',
+          priority: 'medium',
+          assignee: { name: 'Alex Kumar', avatar: '👨‍💻' },
+          dueDate: '2024-08-05',
+          tags: ['Research', 'Sponsorship'],
+          status: 'outbound'
         },
         {
           id: '2',
-          title: 'Set up LinkedIn Automation',
-          description: 'Configure automated LinkedIn posting and engagement workflows',
-          priority: 'medium',
-          assignee: { name: 'Marcus Rodriguez', avatar: '👨‍🚀' },
-          dueDate: '2024-01-28',
-          tags: ['LinkedIn', 'Automation'],
-          comments: 1,
-          status: 'todo'
-        },
-        {
-          id: '3',
-          title: 'Design Brand Guidelines',
-          description: 'Create comprehensive brand guidelines for consistent visual identity',
+          title: 'Draft Outreach Email Template',
+          description: 'Create a personalized and effective outreach template for initial contact.',
           priority: 'low',
-          assignee: { name: 'Emma Thompson', avatar: '👩‍🎨' },
-          dueDate: '2024-02-01',
-          tags: ['Design', 'Branding'],
-          attachments: 1,
-          status: 'todo'
-        },
-        {
-          id: '4',
-          title: 'Research Competitor Content Strategy',
-          description: 'Analyze top competitors and identify content opportunities',
-          priority: 'urgent',
           assignee: { name: 'Alex Kumar', avatar: '👨‍💻' },
-          dueDate: '2024-01-24',
-          tags: ['Research', 'Strategy'],
-          comments: 3,
-          status: 'todo'
+          tags: ['Template', 'Email'],
+          status: 'outbound'
         }
       ]
     },
     {
-      id: 'doing',
-      title: 'Doing',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100',
-      icon: <PlayCircle className="w-5 h-5" />,
+      id: 'negotiation',
+      title: 'Negotiation',
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-100',
+      icon: <MessageSquare className="w-5 h-5" />,
       tasks: [
         {
-          id: '5',
-          title: 'Implement YouTube Integration',
-          description: 'Connect YouTube API and set up automated video publishing workflow',
+          id: '3',
+          title: 'Negotiate with AudioBrand Inc.',
+          description: 'Follow up on their reply and negotiate rates for a 3-video package.',
           priority: 'high',
-          assignee: { name: 'Lisa Park', avatar: '👩‍🔬' },
-          dueDate: '2024-01-26',
-          tags: ['YouTube', 'Integration', 'API'],
-          attachments: 2,
-          comments: 5,
-          checklist: { completed: 4, total: 6 },
-          status: 'doing'
+          assignee: { name: 'Sarah Chen', avatar: '👩‍💼' },
+          dueDate: '2024-08-10',
+          tags: ['Negotiation', 'Rates'],
+          comments: 3,
+          status: 'negotiation'
+        }
+      ]
+    },
+    {
+      id: 'contract',
+      title: 'Contract',
+      color: 'text-indigo-600',
+      bgColor: 'bg-indigo-100',
+      icon: <Edit3 className="w-5 h-5" />,
+      tasks: [
+        {
+          id: '4',
+          title: 'Review Contract from StyleHub',
+          description: 'Carefully review the terms and conditions of the partnership agreement.',
+          priority: 'urgent',
+          assignee: { name: 'Sarah Chen', avatar: '👩‍💼' },
+          dueDate: '2024-08-02',
+          tags: ['Contract', 'Legal'],
+          attachments: 1,
+          status: 'contract'
         },
         {
+          id: '5',
+          title: 'Sign and Return Contract for GameCo',
+          description: 'Finalize the agreement and send back the signed contract.',
+          priority: 'high',
+          assignee: { name: 'Sarah Chen', avatar: '👩‍💼' },
+          dueDate: '2024-08-08',
+          tags: ['Contract', 'Signature'],
+          status: 'contract'
+        }
+      ]
+    },
+    {
+      id: 'pre-production',
+      title: 'Pre-production',
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-100',
+      icon: <Sparkles className="w-5 h-5" />,
+      tasks: [
+        {
           id: '6',
-          title: 'Create TikTok Content Templates',
-          description: 'Design reusable templates for TikTok video content creation',
-          priority: 'medium',
-          assignee: { name: 'Jordan Smith', avatar: '👨‍🎤' },
-          dueDate: '2024-01-27',
-          tags: ['TikTok', 'Templates', 'Video'],
+          title: 'Discuss Deliverables with AudioBrand',
+          description: 'Clarify content format, length, and talking points for the videos.',
+          priority: 'high',
+          assignee: { name: 'Emma Thompson', avatar: '👩‍🎨' },
+          tags: ['Creative Brief', 'Deliverables'],
           comments: 2,
-          status: 'doing'
+          status: 'pre-production'
         },
         {
           id: '7',
-          title: 'Optimize AI Content Generation',
-          description: 'Fine-tune AI models for better content quality and relevance',
-          priority: 'high',
-          assignee: { name: 'Sarah Chen', avatar: '👩‍💼' },
-          tags: ['AI', 'Optimization'],
-          attachments: 1,
-          comments: 4,
-          status: 'doing'
+          title: 'Wait for Product Shipment from GameCo',
+          description: 'Product has been sent, awaiting delivery for filming.',
+          priority: 'medium',
+          assignee: { name: 'Emma Thompson', avatar: '👩‍🎨' },
+          dueDate: '2024-08-15',
+          tags: ['Product', 'Shipping'],
+          status: 'pre-production'
         }
       ]
     },
     {
-      id: 'done',
-      title: 'Done',
+      id: 'filming',
+      title: 'Filming',
+      color: 'text-red-600',
+      bgColor: 'bg-red-100',
+      icon: <PlayCircle className="w-5 h-5" />,
+      tasks: [
+        {
+          id: '8',
+          title: 'Film Unboxing for StyleHub',
+          description: 'Create an engaging unboxing video showcasing the product.',
+          priority: 'high',
+          assignee: { name: 'Jordan Smith', avatar: '👨‍🎤' },
+          checklist: { completed: 1, total: 4 },
+          tags: ['Filming', 'Video', 'UGC'],
+          status: 'filming'
+        }
+      ]
+    },
+    {
+      id: 'payment',
+      title: 'Payment & Completion',
       color: 'text-green-600',
       bgColor: 'bg-green-100',
       icon: <CheckCircle className="w-5 h-5" />,
       tasks: [
         {
-          id: '8',
-          title: 'Launch RepicAI Community Platform',
-          description: 'Successfully launched the community platform with Discord-like features',
-          priority: 'high',
-          assignee: { name: 'Alex Kumar', avatar: '👨‍💻' },
-          tags: ['Community', 'Platform', 'Launch'],
-          attachments: 5,
-          comments: 12,
-          checklist: { completed: 8, total: 8 },
-          status: 'done'
-        },
-        {
           id: '9',
-          title: 'Complete User Onboarding Flow',
-          description: 'Designed and implemented comprehensive 5-step onboarding process',
-          priority: 'medium',
-          assignee: { name: 'Emma Thompson', avatar: '👩‍🎨' },
-          tags: ['UX', 'Onboarding'],
-          comments: 6,
-          status: 'done'
+          title: 'Send Invoice to StyleHub',
+          description: 'Generate and send the invoice upon content approval.',
+          priority: 'high',
+          assignee: { name: 'Marcus Rodriguez', avatar: '👨‍🚀' },
+          tags: ['Invoice', 'Payment'],
+          status: 'payment'
         },
         {
           id: '10',
-          title: 'Set up Analytics Dashboard',
-          description: 'Created comprehensive analytics dashboard with real-time insights',
-          priority: 'high',
+          title: 'Paid: GameCo Partnership',
+          description: 'Payment received, campaign completed successfully.',
+          priority: 'low',
           assignee: { name: 'Marcus Rodriguez', avatar: '👨‍🚀' },
-          tags: ['Analytics', 'Dashboard'],
-          attachments: 3,
-          comments: 8,
-          status: 'done'
+          tags: ['Paid', 'Completed'],
+          status: 'payment'
         }
       ]
     }
@@ -253,7 +265,7 @@ const Workflow = () => {
           // Add task to target column with updated status
           return {
             ...column,
-            tasks: [...tasksWithoutDragged, { ...draggedTaskObj, status: targetColumnId as 'todo' | 'doing' | 'done' }]
+            tasks: [...tasksWithoutDragged, { ...draggedTaskObj, status: targetColumnId as 'outbound' | 'negotiation' | 'contract' | 'pre-production' | 'filming' | 'payment' }]
           };
         }
       }
@@ -445,20 +457,17 @@ const Workflow = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-              {[
-                { label: 'Total Tasks', value: columns.reduce((acc, col) => acc + col.tasks.length, 0), color: 'text-blue-600', bg: 'bg-blue-50' },
-                { label: 'To Do', value: columns.find(col => col.id === 'todo')?.tasks.length || 0, color: 'text-gray-600', bg: 'bg-gray-50' },
-                { label: 'In Progress', value: columns.find(col => col.id === 'doing')?.tasks.length || 0, color: 'text-blue-600', bg: 'bg-blue-50' },
-                { label: 'Completed', value: columns.find(col => col.id === 'done')?.tasks.length || 0, color: 'text-green-600', bg: 'bg-green-50' },
-              ].map((stat, index) => (
-                <div key={index} className="bg-white/80 backdrop-blur-lg rounded-2xl p-4 border border-white/20 shadow-lg">
-                  <div className={`w-10 h-10 ${stat.bg} rounded-xl flex items-center justify-center mb-3`}>
-                    <Sparkles className={`w-5 h-5 ${stat.color}`} />
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+              {columns.map((column) => (
+                <div key={column.id} className="bg-white/80 backdrop-blur-lg rounded-2xl p-4 border border-white/20 shadow-lg">
+                  <div className={`w-10 h-10 ${column.bgColor} rounded-xl flex items-center justify-center mb-3`}>
+                    <div className={column.color}>
+                      {column.icon}
+                    </div>
                   </div>
-                  <div className={`text-2xl font-bold ${stat.color} mb-1`}>{stat.value}</div>
+                  <div className={`text-2xl font-bold ${column.color} mb-1`}>{filteredTasks(column.tasks).length}</div>
                   <div className="text-sm text-gray-600" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
-                    {stat.label}
+                    {column.title}
                   </div>
                 </div>
               ))}
@@ -466,11 +475,11 @@ const Workflow = () => {
           </div>
 
           {/* Kanban Board */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="flex space-x-6 pb-6 overflow-x-auto">
             {columns.map((column) => (
               <div
                 key={column.id}
-                className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-white/20 p-6"
+                className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-white/20 p-6 w-96 flex-shrink-0"
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, column.id)}
               >
@@ -503,10 +512,10 @@ const Workflow = () => {
                   ))}
                   
                   {filteredTasks(column.tasks).length === 0 && (
-                    <div className="flex flex-col items-center justify-center py-12 text-gray-400">
-                      <Circle className="w-12 h-12 mb-3 opacity-50" />
-                      <p className="text-sm" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
-                        No tasks here yet
+                    <div className="flex flex-col items-center justify-center py-12 text-gray-400 h-full">
+                      <Zap className="w-12 h-12 mb-3 opacity-50" />
+                      <p className="text-sm text-center" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
+                        Drag tasks here or create a new one.
                       </p>
                     </div>
                   )}

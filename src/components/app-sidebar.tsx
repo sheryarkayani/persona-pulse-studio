@@ -75,7 +75,7 @@ const menuItems = [
     color: "text-emerald-500",
   },
   {
-    title: "Workflow",
+    title: "Clients Management",
     url: "/workflow",
     icon: Kanban,
     color: "text-violet-500",

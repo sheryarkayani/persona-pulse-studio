@@ -34,13 +34,20 @@ import {
 } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const menuItems = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/dashboard",
     icon: Home,
     color: "text-blue-500",
+  },
+  {
+    title: "Insights",
+    url: "/insights",
+    icon: Target,
+    color: "text-orange-500",
   },
   {
     title: "Content Creation",
@@ -130,6 +137,7 @@ const menuItems = [
 
 export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(false)
+  const location = useLocation()
   return (
     <Sidebar
       className="fixed top-0 left-0 h-screen z-30 bg-gradient-to-b from-white via-[#f5faff] to-[#eaf2ff] shadow-2xl border-none transition-all duration-300 rounded-r-3xl ml-0 w-auto"
@@ -171,7 +179,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => {
                 const Icon = item.icon
-                const isActive = item.title === "Dashboard"
+                const isActive = location.pathname === item.url
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton

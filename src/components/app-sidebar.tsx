@@ -14,6 +14,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Circle,
+  Shuffle,
+  MessageCircle,
+  Kanban,
 } from "lucide-react"
 
 import {
@@ -98,6 +101,24 @@ const menuItems = [
     url: "#",
     icon: Users,
     color: "text-cyan-500",
+  },
+  {
+    title: "Integrations",
+    url: "/integrations",
+    icon: Shuffle,
+    color: "text-indigo-500",
+  },
+  {
+    title: "Community",
+    url: "/community",
+    icon: MessageCircle,
+    color: "text-emerald-500",
+  },
+  {
+    title: "Workflow",
+    url: "/workflow",
+    icon: Kanban,
+    color: "text-violet-500",
   },
   {
     title: "Settings",

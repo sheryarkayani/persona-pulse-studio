@@ -26,6 +26,18 @@ export default function Dashboard() {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         navigate('/login');
+        return;
+      }
+      
+      // Check if user has completed onboarding
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('onboarding_completed')
+        .eq('id', session.user.id)
+        .single();
+        
+      if (profile && !profile.onboarding_completed) {
+        navigate('/onboarding');
       }
     };
     getSession();

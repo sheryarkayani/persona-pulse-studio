@@ -9,6 +9,10 @@ import Dashboard from "./pages/dashboard";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import Onboarding from "./pages/auth/Onboarding";
+import Integrations from "./pages/Integrations";
+import Community from "./pages/Community";
+import Workflow from "./pages/Workflow";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +28,10 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/integrations" element={<Integrations />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/workflow" element={<Workflow />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

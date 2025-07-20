@@ -15,6 +15,7 @@ import Community from "./pages/Community";
 import Workflow from "./pages/Workflow";
 import Insights from "./pages/Insights";
 import TemplatesPage from "./pages/Templates";
+import ContentCreationPage from "./pages/ContentCreation";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/workflow" element={<Workflow />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/templates" element={<TemplatesPage />} />
+          <Route path="/content-creation" element={<ContentCreationPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -45,19 +45,19 @@ const menuItems = [
     color: "text-blue-500",
   },
   {
-    title: "Insights",
+    title: "AI Insights",
     url: "/insights",
     icon: Target,
     color: "text-orange-500",
   },
   {
     title: "Content Creation",
-    url: "#",
+    url: "/content-creation",
     icon: FileText,
     color: "text-green-500",
   },
   {
-    title: "Plug & Play Templates",
+    title: "Plug-Play Templates",
     url: "/templates",
     icon: LayoutGrid,
     color: "text-cyan-500",

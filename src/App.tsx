@@ -17,7 +17,6 @@ import Workflow from "./pages/Workflow";
 import Insights from "./pages/Insights";
 import TemplatesPage from "./pages/Templates";
 import ContentCreationPage from "./pages/ContentCreation";
-import FollowerChat from "./pages/FollowerChat";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +39,6 @@ const App = () => (
           <Route path="/insights" element={<Insights />} />
           <Route path="/templates" element={<TemplatesPage />} />
           <Route path="/content-creation" element={<ContentCreationPage />} />
-          <Route path="/follower-chat" element={<FollowerChat />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

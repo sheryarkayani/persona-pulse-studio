@@ -13,6 +13,7 @@ import {
   Zap,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Circle,
   Shuffle,
   MessageCircle,
@@ -34,7 +35,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useLocation } from "react-router-dom"
 
 const menuItems = [
@@ -57,10 +58,25 @@ const menuItems = [
     color: "text-green-500",
   },
   {
-    title: "Plug-Play Templates",
-    url: "/templates",
-    icon: LayoutGrid,
-    color: "text-cyan-500",
+    title: "Workflows",
+    url: "/workflows",
+    icon: Kanban,
+    color: "text-violet-500",
+    hasSubItems: true,
+    subItems: [
+      {
+        title: "Plug n Play",
+        url: "/templates",
+        icon: LayoutGrid,
+        color: "text-cyan-500",
+      },
+      {
+        title: "Client Management",
+        url: "/workflow",
+        icon: Users,
+        color: "text-purple-500",
+      }
+    ]
   },
   {
     title: "Integrations",
@@ -75,14 +91,14 @@ const menuItems = [
     color: "text-emerald-500",
   },
   {
-    title: "Clients Management",
-    url: "/workflow",
-    icon: Kanban,
-    color: "text-violet-500",
+    title: "Follower Chat",
+    url: "/follower-chat",
+    icon: MessageSquare,
+    color: "text-pink-500",
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
     color: "text-gray-500",
   },
@@ -90,7 +106,27 @@ const menuItems = [
 
 export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(false)
+  const [expandedItems, setExpandedItems] = useState<string[]>([])
   const location = useLocation()
+
+  const isActiveItem = (item: any) => {
+    if (item.hasSubItems) {
+      // Check if the current path is the parent path OR any of the sub-item paths
+      return location.pathname === item.url || item.subItems?.some((subItem: any) => location.pathname === subItem.url)
+    }
+    return location.pathname === item.url
+  }
+
+  const toggleExpanded = (itemTitle: string) => {
+    setExpandedItems(prev => 
+      prev.includes(itemTitle) 
+        ? prev.filter(item => item !== itemTitle)
+        : [...prev, itemTitle]
+    )
+  }
+
+  const isExpanded = (itemTitle: string) => expandedItems.includes(itemTitle)
+
   return (
     <Sidebar
       className="fixed top-0 left-0 h-screen z-30 bg-gradient-to-b from-white via-[#f5faff] to-[#eaf2ff] shadow-2xl border-none transition-all duration-300 rounded-r-3xl ml-0 w-auto"
@@ -132,21 +168,68 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => {
                 const Icon = item.icon
-                const isActive = location.pathname === item.url
+                const isActive = isActiveItem(item)
+                const expanded = isExpanded(item.title)
+                
                 return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      className={`group flex items-center gap-3 rounded-2xl px-4 py-3 my-2 transition-all duration-200 text-base font-semibold ${isActive ? "bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white shadow-xl" : "bg-white hover:bg-blue-50/60 hover:shadow-md text-gray-900"} ${collapsed ? 'justify-center px-0' : ''}`}
-                      style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
-                    >
-                      <a href={item.url} className="flex items-center gap-3 w-full">
-                        <Icon className={`h-6 w-6 ${item.color} group-hover:scale-110 group-hover:drop-shadow transition-transform duration-200`} />
-                        {!collapsed && <span className={`font-semibold text-base ${isActive ? 'bg-gradient-to-r from-[#2563eb] to-[#38b6ff] bg-clip-text text-transparent' : ''}`} style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>{item.title}</span>}
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                  <React.Fragment key={item.title}>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton
+                        asChild={!item.hasSubItems}
+                        isActive={isActive && !item.hasSubItems}
+                        className={`group flex items-center gap-3 rounded-2xl px-4 py-3 my-1 transition-all duration-200 text-base font-semibold ${isActive && !item.hasSubItems ? "bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white shadow-xl" : "bg-white hover:bg-blue-50/60 hover:shadow-md text-gray-900"} ${collapsed ? 'justify-center px-0' : ''}`}
+                        style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
+                      >
+                        {item.hasSubItems ? (
+                          <button 
+                            className="flex items-center gap-3 w-full"
+                            onClick={() => !collapsed && toggleExpanded(item.title)}
+                          >
+                            <Icon className={`h-6 w-6 ${item.color} group-hover:scale-110 group-hover:drop-shadow transition-transform duration-200`} />
+                            {!collapsed && (
+                              <>
+                                <span className="font-semibold text-base flex-1 text-left" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>{item.title}</span>
+                                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
+                              </>
+                            )}
+                          </button>
+                        ) : (
+                          <a href={item.url} className="flex items-center gap-3 w-full">
+                            <Icon className={`h-6 w-6 ${item.color} group-hover:scale-110 group-hover:drop-shadow transition-transform duration-200`} />
+                            {!collapsed && <span className={`font-semibold text-base ${isActive ? 'text-white' : ''}`} style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>{item.title}</span>}
+                          </a>
+                        )}
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+
+                    {/* Accordion sub-menu */}
+                    {item.hasSubItems && expanded && !collapsed && (
+                      <div className="pl-8 pr-2 pt-0 pb-1">
+                        {item.subItems.map((subItem) => {
+                          const SubIcon = subItem.icon
+                          const isSubActive = location.pathname === subItem.url
+                          
+                          return (
+                            <SidebarMenuItem key={subItem.title}>
+                              <SidebarMenuButton
+                                asChild
+                                isActive={isSubActive}
+                                className={`group flex items-center gap-3 rounded-xl px-4 py-2 my-1 transition-all duration-200 text-sm font-medium ${isSubActive ? "bg-blue-100 text-blue-700 shadow-inner" : "hover:bg-blue-50/60 text-gray-600"}`}
+                                style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
+                              >
+                                <a href={subItem.url} className="flex items-center gap-3 w-full">
+                                  <SubIcon className={`h-5 w-5 ${subItem.color}`} />
+                                  <span className={`font-medium text-sm`} style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>
+                                    {subItem.title}
+                                  </span>
+                                </a>
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </React.Fragment>
                 )
               })}
             </SidebarMenu>

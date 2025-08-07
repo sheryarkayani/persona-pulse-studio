@@ -38,10 +38,10 @@ const Login = () => {
         if (profile && !profile.onboarding_completed) {
           navigate('/onboarding');
         } else {
-          navigate('/dashboard');
+          navigate('/app');
         }
       } else {
-        navigate('/dashboard');
+        navigate('/app');
       }
     } catch (error: any) {
       setError(error.error_description || error.message || 'Login failed');

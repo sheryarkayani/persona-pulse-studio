@@ -85,12 +85,12 @@ const Onboarding = () => {
         if (error) throw error;
         
         // Redirect to dashboard
-        navigate('/dashboard');
+        navigate('/app');
       }
     } catch (error) {
       console.error('Error saving onboarding data:', error);
       // Continue to dashboard even if onboarding save fails
-      navigate('/dashboard');
+      navigate('/app');
     } finally {
       setLoading(false);
     }
@@ -666,7 +666,7 @@ const Onboarding = () => {
         {/* Skip Option */}
         <div className="text-center mt-6">
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/app')}
             className="text-gray-500 hover:text-gray-700 text-sm transition-colors"
             style={{ fontFamily: 'Inter, Poppins, sans-serif' }}
           >

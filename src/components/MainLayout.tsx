@@ -8,7 +8,12 @@ import {
   Calendar, 
   Settings, 
   HelpCircle,
-  CreditCard
+  CreditCard,
+  BarChart3,
+  Zap,
+  Users,
+  Shuffle,
+  LayoutGrid
 } from "lucide-react";
 
 const MainLayout = () => {
@@ -17,16 +22,34 @@ const MainLayout = () => {
 
   const navigationItems = [
     {
-      name: "Create Post",
+      name: "Create Content",
       icon: CheckCircle2,
       path: "/app/create-post",
       isActive: currentPath === "/app" || currentPath === "/app/create-post"
     },
     {
+      name: "Dashboard",
+      icon: BarChart3,
+      path: "/app/dashboard",
+      isActive: currentPath === "/app/dashboard"
+    },
+    {
       name: "Lead Magnet AI",
       icon: Magnet,
-      path: "/app/lead-magnet",
-      isActive: currentPath === "/app/lead-magnet"
+      path: "/app/lead-magnet-ai",
+      isActive: currentPath === "/app/lead-magnet" || currentPath === "/app/lead-magnet-ai"
+    },
+    {
+      name: "AI Insights",
+      icon: Zap,
+      path: "/app/insights",
+      isActive: currentPath === "/app/insights"
+    },
+    {
+      name: "Templates",
+      icon: LayoutGrid,
+      path: "/app/templates",
+      isActive: currentPath === "/app/templates"
     },
     {
       name: "Post Library",
@@ -39,6 +62,18 @@ const MainLayout = () => {
       icon: Calendar,
       path: "/app/calendar",
       isActive: currentPath === "/app/calendar"
+    },
+    {
+      name: "Integrations",
+      icon: Shuffle,
+      path: "/app/integrations",
+      isActive: currentPath === "/app/integrations"
+    },
+    {
+      name: "Community",
+      icon: Users,
+      path: "/app/community",
+      isActive: currentPath === "/app/community"
     },
     {
       name: "Settings",
@@ -64,12 +99,13 @@ const MainLayout = () => {
             <div className="w-8 h-8 bg-gradient-to-br from-[#C3BEEF] to-[#81A4F7] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">R</span>
             </div>
-            <span className="text-xl font-semibold text-gray-900">Repic</span>
+            <span className="text-xl font-semibold text-gray-900">Repic AI</span>
           </div>
+          <p className="text-xs text-gray-500 mt-1">Instagram Content Studio</p>
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 p-4">
+        <nav className="flex-1 p-4 overflow-y-auto">
           <ul className="space-y-2">
             {navigationItems.map((item) => {
               const Icon = item.icon;

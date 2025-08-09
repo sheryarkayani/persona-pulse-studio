@@ -8,28 +8,30 @@ import { Magnet, FileText, Video, Database, Settings } from "lucide-react";
 
 const LeadMagnetAI = () => {
   const [selectedResourceType, setSelectedResourceType] = useState("");
-  const [resourceOutline, setResourceOutline] = useState(`A full guide to creating a killer outbound system.
+  const [resourceOutline, setResourceOutline] = useState(`A complete guide to Instagram growth and engagement.
 
 Includes:
-- How to create LinkedIn DMs
-- How to write compelling cold email copy
-- How to arrive 1000 leads in 60 seconds`);
-  const [cta, setCta] = useState("Download & Comment 'EXAMPLE' and I'll send it to you.");
+- How to create viral Instagram Reels
+- Instagram Story strategies that convert
+- How to gain 1000 targeted followers in 30 days
+- Content planning templates for consistent posting`);
+  const [cta, setCta] = useState("Download free! Comment 'GROWTH' and I'll send it to your DMs.");
 
   const resourceTypes = [
     "Info Document",
-    "Automation workflow",
     "Video masterclass",
-    "Miro board",
-    "Database"
+    "Content templates",
+    "Instagram toolkit",
+    "Growth checklist"
   ];
 
   const getResourceIcon = (type: string) => {
     switch (type) {
       case "Info Document": return FileText;
       case "Video masterclass": return Video;
-      case "Database": return Database;
-      case "Miro board": return Settings;
+      case "Instagram toolkit": return Database;
+      case "Content templates": return Settings;
+      case "Growth checklist": return Magnet;
       default: return FileText;
     }
   };
@@ -40,7 +42,8 @@ Includes:
       <div className="flex-1 p-8 overflow-y-auto">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Lead Magnet AI</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Instagram Lead Magnet AI</h1>
+          <p className="text-gray-600 mt-2">Create irresistible lead magnets to grow your Instagram audience</p>
         </div>
 
         {/* Form Sections */}
@@ -68,6 +71,15 @@ Includes:
                 })}
               </SelectContent>
             </Select>
+            {selectedResourceType && (
+              <p className="text-sm text-gray-600 mt-2">
+                {selectedResourceType === "Info Document" && "Perfect for PDFs, guides, and downloadable resources"}
+                {selectedResourceType === "Video masterclass" && "Great for educational content and tutorials"}
+                {selectedResourceType === "Content templates" && "Ready-to-use templates for Instagram posts and stories"}
+                {selectedResourceType === "Instagram toolkit" && "Complete resource collections and databases"}
+                {selectedResourceType === "Growth checklist" && "Step-by-step action plans and checklists"}
+              </p>
+            )}
           </div>
 
           {/* Resource Outline Section */}
@@ -76,7 +88,7 @@ Includes:
               Resource Outline
             </Label>
             <p className="text-sm text-gray-600 mb-3">
-              Please format the outline like the placeholder below.
+              Please format the outline like the placeholder below. Be specific about the Instagram value you're providing.
             </p>
             <Textarea
               value={resourceOutline}
@@ -92,12 +104,12 @@ Includes:
               CTA (optional)
             </Label>
             <p className="text-sm text-gray-600 mb-3">
-              If you do not provide a CTA, the AI will create one for you.
+              If you do not provide a CTA, the AI will create one optimized for Instagram engagement.
             </p>
             <Textarea
               value={cta}
               onChange={(e) => setCta(e.target.value)}
-              placeholder="Download & Comment 'EXAMPLE' and I'll send it to you."
+              placeholder="Download free! Comment 'GROWTH' and I'll send it to your DMs."
               className="w-full"
               rows={3}
             />
@@ -107,7 +119,7 @@ Includes:
           <Button 
             className="w-full bg-gradient-to-r from-[#C3BEEF] to-[#81A4F7] hover:from-[#B8B3E6] hover:to-[#7B9EF5] text-white py-3 text-lg font-medium"
           >
-            Generate Lead Magnet
+            Generate Instagram Lead Magnet
           </Button>
         </div>
       </div>
@@ -118,30 +130,30 @@ Includes:
           <CardHeader>
             <CardTitle className="flex items-center space-x-2 text-lg">
               <Magnet className="text-[#C3BEEF]" size={20} />
-              <span>Lead Magnet Tips</span>
+              <span>Instagram Lead Magnet Tips</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">
-                What makes a great lead magnet:
+                What makes a great Instagram lead magnet:
               </h4>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start space-x-2">
                   <span className="text-[#C3BEEF] mt-1">•</span>
-                  <span>Solves a specific problem quickly</span>
+                  <span>Solves a specific Instagram challenge</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-[#C3BEEF] mt-1">•</span>
-                  <span>Provides immediate value</span>
+                  <span>Provides immediate actionable value</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-[#C3BEEF] mt-1">•</span>
-                  <span>Easy to consume (under 10 pages)</span>
+                  <span>Easy to consume on mobile</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-[#C3BEEF] mt-1">•</span>
-                  <span>Actionable and practical</span>
+                  <span>Visual and Instagram-friendly format</span>
                 </li>
               </ul>
             </div>
@@ -150,24 +162,24 @@ Includes:
 
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle className="text-lg">Popular Resource Types</CardTitle>
+            <CardTitle className="text-lg">Popular Instagram Resource Types</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="text-sm text-gray-700">
               <div className="mb-3">
-                <span className="font-medium">Info Documents:</span> PDFs, guides, checklists
+                <span className="font-medium">Info Documents:</span> Growth guides, strategy PDFs, content calendars
               </div>
               <div className="mb-3">
-                <span className="font-medium">Video Masterclass:</span> Training videos, webinars
+                <span className="font-medium">Video Masterclass:</span> Reels tutorials, Live training sessions
               </div>
               <div className="mb-3">
-                <span className="font-medium">Automation Workflow:</span> Process templates, sequences
+                <span className="font-medium">Content Templates:</span> Post templates, Story templates, caption frameworks
               </div>
               <div className="mb-3">
-                <span className="font-medium">Miro Board:</span> Visual frameworks, mind maps
+                <span className="font-medium">Instagram Toolkit:</span> Hashtag lists, content ideas, growth resources
               </div>
               <div>
-                <span className="font-medium">Database:</span> Resource lists, directories
+                <span className="font-medium">Growth Checklist:</span> Daily action plans, optimization checklists
               </div>
             </div>
           </CardContent>
@@ -178,14 +190,25 @@ Includes:
             <div className="space-y-3">
               <h4 className="font-semibold text-gray-900">Example Outlines</h4>
               <div className="text-sm text-gray-700">
-                <p className="font-medium mb-1">For Info Document:</p>
+                <p className="font-medium mb-1">For Instagram Growth Guide:</p>
                 <p className="mb-3 text-xs bg-white p-2 rounded border">
-                  "5-step LinkedIn outreach framework<br/>
-                  - Step 1: Profile optimization<br/>
-                  - Step 2: Connection strategy<br/>
-                  - Step 3: Message templates<br/>
-                  - Step 4: Follow-up sequence<br/>
-                  - Step 5: Conversion tracking"
+                  "7-day Instagram growth challenge<br/>
+                  - Day 1: Profile optimization secrets<br/>
+                  - Day 2: Content that converts followers<br/>
+                  - Day 3: Hashtag strategy that works<br/>
+                  - Day 4: Stories that drive engagement<br/>
+                  - Day 5: Reels for maximum reach<br/>
+                  - Day 6: Community building tactics<br/>
+                  - Day 7: Analytics and optimization"
+                </p>
+                
+                <p className="font-medium mb-1">For Content Templates:</p>
+                <p className="mb-3 text-xs bg-white p-2 rounded border">
+                  "30 viral Instagram post templates<br/>
+                  - 10 educational carousel templates<br/>
+                  - 10 behind-the-scenes story ideas<br/>
+                  - 10 engagement-boosting captions<br/>
+                  - Bonus: Hashtag research worksheet"
                 </p>
               </div>
             </div>

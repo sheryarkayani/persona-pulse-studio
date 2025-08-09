@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Lightbulb, TrendingUp, Copy, Download, Share2, CheckCircle } from "lucide-react";
+import { Sparkles, Lightbulb, TrendingUp, Copy, Download, Share2, CheckCircle, Video, FileText, Zap } from "lucide-react";
 import { OpenAIService, type TopicSuggestion, type GeneratedPost } from "@/lib/openai";
 import { toast } from "sonner";
 
@@ -15,7 +15,7 @@ const CreatePost = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedTone, setSelectedTone] = useState("");
   const [topicMode, setTopicMode] = useState<"custom" | "ai">("custom");
-  const [customTopic, setCustomTopic] = useState("lead magnet linkedin posts");
+  const [customTopic, setCustomTopic] = useState("Instagram growth strategies");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingPost, setIsGeneratingPost] = useState(false);
@@ -26,23 +26,27 @@ const CreatePost = () => {
   const [isRegenerating, setIsRegenerating] = useState(false);
 
   const postCategories = [
-    "Any",
-    "Professional advice",
-    "Explanation & analysis",
-    "Personal story",
-    "Personal opinion",
-    "Case study - client",
-    "Case study - personal",
-    "List of tips"
+    "Script Writing",
+    "Post Writing", 
+    "Lead Magnet"
   ];
 
   const postTones = [
-    "Standard (authoritative)",
-    "Descriptive",
-    "Casual",
-    "Narrative",
-    "Humorous"
+    "Educational",
+    "Entertainment",
+    "Inspirational",
+    "Behind-the-scenes",
+    "Storytelling"
   ];
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "Script Writing": return Video;
+      case "Post Writing": return FileText;
+      case "Lead Magnet": return Zap;
+      default: return FileText;
+    }
+  };
 
   const generateAITopics = async () => {
     if (!selectedCategory) {
@@ -66,7 +70,7 @@ const CreatePost = () => {
     }
   };
 
-  const generateLinkedInPost = async () => {
+  const generateInstagramPost = async () => {
     if (!selectedCategory) {
       toast.error("Please select a post category");
       return;
@@ -84,17 +88,17 @@ const CreatePost = () => {
 
     setIsGeneratingPost(true);
     try {
-      const post = await OpenAIService.generateLinkedInPost(
+      const post = await OpenAIService.generateInstagramPost(
         selectedCategory,
         topicToUse,
         selectedTone
       );
       setGeneratedPost(post);
       setShowGeneratedPost(true);
-      toast.success("LinkedIn post generated successfully!");
+      toast.success("Instagram content generated successfully!");
     } catch (error) {
       console.error('Error generating post:', error);
-      toast.error("Failed to generate post. Please try again.");
+      toast.error("Failed to generate content. Please try again.");
     } finally {
       setIsGeneratingPost(false);
     }
@@ -114,10 +118,10 @@ const CreatePost = () => {
       );
       setGeneratedPost(newPost);
       setAdditionalInstructions("");
-      toast.success("Post regenerated with your instructions!");
+      toast.success("Content regenerated with your instructions!");
     } catch (error) {
       console.error('Error regenerating post:', error);
-      toast.error("Failed to regenerate post. Please try again.");
+      toast.error("Failed to regenerate content. Please try again.");
     } finally {
       setIsRegenerating(false);
     }
@@ -141,7 +145,8 @@ const CreatePost = () => {
       <div className="flex-1 p-8 overflow-y-auto">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Create Post</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Create Instagram Content</h1>
+          <p className="text-gray-600 mt-2">Generate engaging Instagram posts, scripts, and lead magnets</p>
         </div>
 
         {/* Form Sections */}
@@ -149,20 +154,33 @@ const CreatePost = () => {
           {/* Post Category Section */}
           <div>
             <Label htmlFor="category" className="text-base font-medium text-gray-900 mb-3 block">
-              Post Category
+              Content Category
             </Label>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Choose an option..." />
               </SelectTrigger>
               <SelectContent>
-                {postCategories.map((category) => (
-                  <SelectItem key={category} value={category}>
-                    {category}
-                  </SelectItem>
-                ))}
+                {postCategories.map((category) => {
+                  const Icon = getCategoryIcon(category);
+                  return (
+                    <SelectItem key={category} value={category}>
+                      <div className="flex items-center space-x-2">
+                        <Icon size={16} />
+                        <span>{category}</span>
+                      </div>
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Select>
+            {selectedCategory && (
+              <p className="text-sm text-gray-600 mt-2">
+                {selectedCategory === "Script Writing" && "Perfect for Instagram Reels and Stories - includes hooks and full scripts"}
+                {selectedCategory === "Post Writing" && "Engaging Instagram posts optimized for feed and carousel content"}
+                {selectedCategory === "Lead Magnet" && "Content designed to capture leads and grow your Instagram audience"}
+              </p>
+            )}
           </div>
 
           {/* Topic Section */}
@@ -197,11 +215,11 @@ const CreatePost = () => {
                 <Input
                   value={customTopic}
                   onChange={(e) => setCustomTopic(e.target.value)}
-                  placeholder="lead magnet linkedin posts"
+                  placeholder="Instagram growth strategies"
                   className="w-full"
                 />
                 <p className="text-sm text-gray-600">
-                  Provide a brief topic idea here. Your choice in the post category is factored in when the ideas are generated. 
+                  Provide a brief topic idea here. Your choice in the content category is factored in when the ideas are generated. 
                   Leave the box blank for the AI to decide.
                 </p>
                 <Button
@@ -261,7 +279,7 @@ const CreatePost = () => {
           {/* Post Tone Section */}
           <div>
             <Label htmlFor="tone" className="text-base font-medium text-gray-900 mb-3 block">
-              Post Tone
+              Content Tone
             </Label>
             <Select value={selectedTone} onValueChange={setSelectedTone}>
               <SelectTrigger className="w-full">
@@ -279,17 +297,17 @@ const CreatePost = () => {
 
           {/* Generate Post Button */}
           <Button 
-            onClick={generateLinkedInPost}
+            onClick={generateInstagramPost}
             disabled={isGeneratingPost || !selectedCategory || !selectedTone}
             className="w-full bg-gradient-to-r from-[#C3BEEF] to-[#81A4F7] hover:from-[#B8B3E6] hover:to-[#7B9EF5] text-white py-3 text-lg font-medium"
           >
             {isGeneratingPost ? (
               <>
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                Generating Post...
+                Generating Content...
               </>
             ) : (
-              "Generate Post"
+              "Generate Instagram Content"
             )}
           </Button>
         </div>
@@ -301,26 +319,30 @@ const CreatePost = () => {
           <CardHeader>
             <CardTitle className="flex items-center space-x-2 text-lg">
               <TrendingUp className="text-[#C3BEEF]" size={20} />
-              <span>AI Insights</span>
+              <span>Instagram Insights</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">
-                4 lead magnets that are crushing it on LinkedIn right now:
+                Top performing Instagram content types:
               </h4>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start space-x-2">
                   <span className="text-[#C3BEEF] mt-1">•</span>
-                  <span>One-page playbooks</span>
+                  <span>Short-form video content (Reels)</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-[#C3BEEF] mt-1">•</span>
-                  <span>Simple, actionable templates your audience can implement to get results</span>
+                  <span>Behind-the-scenes content</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-[#C3BEEF] mt-1">•</span>
-                  <span>Perfect for busy decision-makers</span>
+                  <span>Educational carousel posts</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <span className="text-[#C3BEEF] mt-1">•</span>
+                  <span>User-generated content</span>
                 </li>
               </ul>
             </div>
@@ -336,16 +358,15 @@ const CreatePost = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="text-sm text-gray-700">
-              <p className="font-medium mb-2">But here's what most people miss...</p>
+              <p className="font-medium mb-2">Instagram Algorithm Secrets:</p>
               <p className="mb-3">
-                The lead magnet itself doesn't matter as much as the problem it solves.
+                The first 3 seconds of your content determine its reach. Strong hooks are essential.
               </p>
               <p className="mb-3">
-                I've seen terrible PDFs outperform beautiful guides simply because they solved real problems, 
-                not created pretty downloads.
+                Consistency beats perfection. Post regularly and engage with your audience.
               </p>
               <p className="font-medium text-[#C3BEEF]">
-                Focus on solving real problems, not creating pretty downloads.
+                Focus on value, authenticity, and community building.
               </p>
             </div>
           </CardContent>
@@ -354,7 +375,7 @@ const CreatePost = () => {
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900">Tell us what you wanted?</h4>
+              <h4 className="font-semibold text-gray-900">Improve your content</h4>
               <Textarea 
                 placeholder="Add extra instructions for better results..."
                 className="resize-none"
@@ -388,12 +409,26 @@ const CreatePost = () => {
           <DialogHeader>
             <DialogTitle className="flex items-center space-x-2">
               <CheckCircle className="text-green-500" size={24} />
-              <span>Your LinkedIn Post is Ready!</span>
+              <span>Your Instagram Content is Ready!</span>
             </DialogTitle>
           </DialogHeader>
           
           {generatedPost && (
             <div className="space-y-6">
+              {/* Hook */}
+              {generatedPost.hook && (
+                <div>
+                  <Label className="text-sm font-medium text-gray-700 mb-2 block">
+                    Hook (Opening Line):
+                  </Label>
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200">
+                    <div className="text-sm font-medium text-gray-800">
+                      {generatedPost.hook}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Post Content */}
               <div className="space-y-4">
                 <div>
@@ -406,6 +441,20 @@ const CreatePost = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Script */}
+                {generatedPost.script && (
+                  <div>
+                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
+                      Video Script:
+                    </Label>
+                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                      <div className="whitespace-pre-wrap text-sm text-gray-800">
+                        {generatedPost.script}
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Hashtags */}
                 <div>
@@ -426,7 +475,7 @@ const CreatePost = () => {
                   <Label className="text-sm font-medium text-gray-700 mb-2 block">
                     Call to Action:
                   </Label>
-                  <div className="bg-gray-50 p-3 rounded-lg border">
+                  <div className="bg-green-50 p-3 rounded-lg border border-green-200">
                     <p className="text-sm text-gray-800">{generatedPost.callToAction}</p>
                   </div>
                 </div>
@@ -435,7 +484,7 @@ const CreatePost = () => {
               {/* Action Buttons */}
               <div className="flex space-x-3 pt-4 border-t">
                 <Button
-                  onClick={() => copyToClipboard(`${generatedPost.content}\n\n${generatedPost.callToAction}\n\n${generatedPost.hashtags.join(' ')}`)}
+                  onClick={() => copyToClipboard(`${generatedPost.hook ? generatedPost.hook + '\n\n' : ''}${generatedPost.content}\n\n${generatedPost.callToAction}\n\n${generatedPost.hashtags.join(' ')}`)}
                   className="flex items-center space-x-2"
                   variant="outline"
                 >
@@ -450,11 +499,21 @@ const CreatePost = () => {
                   <Copy size={16} />
                   <span>Copy Content</span>
                 </Button>
+                {generatedPost.script && (
+                  <Button
+                    onClick={() => copyToClipboard(generatedPost.script || '')}
+                    className="flex items-center space-x-2"
+                    variant="outline"
+                  >
+                    <Video size={16} />
+                    <span>Copy Script</span>
+                  </Button>
+                )}
                 <Button
                   className="flex items-center space-x-2 bg-gradient-to-r from-[#C3BEEF] to-[#81A4F7] hover:from-[#B8B3E6] hover:to-[#7B9EF5] text-white"
                 >
                   <Share2 size={16} />
-                  <span>Share to LinkedIn</span>
+                  <span>Share to Instagram</span>
                 </Button>
               </div>
             </div>

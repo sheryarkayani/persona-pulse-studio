@@ -14,21 +14,23 @@ export interface GeneratedPost {
   content: string;
   hashtags: string[];
   callToAction: string;
+  hook?: string;
+  script?: string;
 }
 
 export class OpenAIService {
   static async generateTopicSuggestions(category: string, customTopic?: string): Promise<TopicSuggestion[]> {
     try {
       const prompt = customTopic 
-        ? `Generate 8 specific and engaging LinkedIn post topics about "${customTopic}" in the "${category}" category. Each topic should be specific, actionable, and likely to get engagement on LinkedIn.`
-        : `Generate 8 engaging LinkedIn post topics for the "${category}" category. Make them specific, actionable, and likely to get high engagement on LinkedIn.`;
+        ? `Generate 8 specific and engaging Instagram post topics about "${customTopic}" in the "${category}" category. Each topic should be specific, actionable, and optimized for Instagram engagement with reels, stories, and posts.`
+        : `Generate 8 engaging Instagram post topics for the "${category}" category. Make them specific, actionable, and optimized for Instagram engagement including reels, stories, and carousel posts.`;
 
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
-            content: "You are a LinkedIn content expert. Generate engaging, specific post topics that would perform well on LinkedIn. Return only a JSON array of objects with 'title' field for each topic. No additional text or formatting."
+            content: "You are an Instagram content expert specializing in viral content creation. Generate engaging, specific post topics that would perform well on Instagram across all formats - reels, stories, posts, and carousels. Return only a JSON array of objects with 'title' field for each topic. No additional text or formatting."
           },
           {
             role: "user",
@@ -59,36 +61,42 @@ export class OpenAIService {
     }
   }
 
-  static async generateLinkedInPost(
+  static async generateInstagramPost(
     category: string,
     topic: string,
     tone: string
   ): Promise<GeneratedPost> {
     try {
       const toneInstructions = {
-        "Standard (authoritative)": "professional, authoritative, and informative",
-        "Descriptive": "detailed, descriptive, and educational",
-        "Casual": "casual, conversational, and friendly", 
-        "Narrative": "storytelling, personal, and engaging",
-        "Humorous": "light-hearted, humorous, and entertaining"
+        "Educational": "informative, educational, and value-driven",
+        "Entertainment": "fun, engaging, and entertaining", 
+        "Inspirational": "motivational, inspiring, and uplifting",
+        "Behind-the-scenes": "authentic, personal, and relatable",
+        "Storytelling": "narrative-driven, emotional, and compelling"
       };
 
-      const toneStyle = toneInstructions[tone as keyof typeof toneInstructions] || "professional";
+      const toneStyle = toneInstructions[tone as keyof typeof toneInstructions] || "engaging";
 
-      const prompt = `Create a LinkedIn post about "${topic}" in the "${category}" category with a ${toneStyle} tone.
+      const prompt = `Create Instagram content about "${topic}" in the "${category}" category with a ${toneStyle} tone.
 
 Requirements:
 - Write in ${toneStyle} style
-- 150-300 words optimal length
-- Include engaging hook in first line
-- Add 3-5 relevant hashtags
+- Create content for Instagram format (concise, visual-friendly)
+- Include a compelling hook for the first line
+- Generate a video script if applicable (for reels/stories)
+- Add 8-12 relevant hashtags (mix of popular and niche)
 - Include a clear call-to-action
-- Format for LinkedIn readability (short paragraphs, line breaks)
+- Format for Instagram readability (short paragraphs, line breaks)
 - Make it valuable and shareable
+- NO EMOJIS - use clean text only
+- Professional formatting with proper spacing
+- Focus on engagement and value
 
 Return ONLY a JSON object with this structure:
 {
   "content": "The main post content",
+  "hook": "Compelling opening line",
+  "script": "Video script for reels/stories (if applicable)",
   "hashtags": ["hashtag1", "hashtag2", "hashtag3"],
   "callToAction": "The call to action text"
 }`;
@@ -98,7 +106,7 @@ Return ONLY a JSON object with this structure:
         messages: [
           {
             role: "system",
-            content: "You are an expert LinkedIn content creator. Create engaging, professional LinkedIn posts that drive engagement and provide value. Always return valid JSON only."
+            content: "You are an expert Instagram content creator specializing in viral content across all Instagram formats. Create engaging, professional Instagram content that drives engagement and provides value. Always return valid JSON only. Never use emojis - focus on clean, professional text formatting."
           },
           {
             role: "user",
@@ -116,6 +124,8 @@ Return ONLY a JSON object with this structure:
         const post = JSON.parse(content);
         return {
           content: post.content || '',
+          hook: post.hook || '',
+          script: post.script || '',
           hashtags: post.hashtags || [],
           callToAction: post.callToAction || ''
         };
@@ -123,12 +133,14 @@ Return ONLY a JSON object with this structure:
         // Fallback if JSON parsing fails
         return {
           content: content,
-          hashtags: ['#LinkedIn', '#Professional', '#Growth'],
+          hook: 'Attention-grabbing opening line',
+          script: 'Video script content',
+          hashtags: ['#Instagram', '#Content', '#Growth'],
           callToAction: 'What are your thoughts? Share in the comments below!'
         };
       }
     } catch (error) {
-      console.error('Error generating LinkedIn post:', error);
+      console.error('Error generating Instagram post:', error);
       throw new Error('Failed to generate post. Please try again.');
     }
   }
@@ -138,17 +150,25 @@ Return ONLY a JSON object with this structure:
     additionalInstructions: string
   ): Promise<GeneratedPost> {
     try {
-      const prompt = `Take this LinkedIn post and modify it based on the additional instructions:
+      const prompt = `Take this Instagram content and modify it based on the additional instructions:
 
-Original Post:
+Original Content:
 ${originalContent}
 
 Additional Instructions:
 ${additionalInstructions}
 
+Requirements:
+- NO EMOJIS - use clean text only
+- Professional formatting with proper spacing
+- Maintain Instagram best practices
+- Keep content engaging and valuable
+
 Return ONLY a JSON object with this structure:
 {
   "content": "The modified post content",
+  "hook": "Updated hook line",
+  "script": "Updated video script (if applicable)",
   "hashtags": ["hashtag1", "hashtag2", "hashtag3"],
   "callToAction": "The call to action text"
 }`;
@@ -158,7 +178,7 @@ Return ONLY a JSON object with this structure:
         messages: [
           {
             role: "system",
-            content: "You are an expert LinkedIn content creator. Modify LinkedIn posts based on user feedback while maintaining professional quality and engagement. Always return valid JSON only."
+            content: "You are an expert Instagram content creator. Modify Instagram content based on user feedback while maintaining professional quality and engagement. Always return valid JSON only. Never use emojis - focus on clean, professional text formatting."
           },
           {
             role: "user",
@@ -175,7 +195,9 @@ Return ONLY a JSON object with this structure:
       const post = JSON.parse(content);
       return {
         content: post.content || originalContent,
-        hashtags: post.hashtags || ['#LinkedIn', '#Professional'],
+        hook: post.hook || '',
+        script: post.script || '',
+        hashtags: post.hashtags || ['#Instagram', '#Content'],
         callToAction: post.callToAction || 'Share your thoughts!'
       };
     } catch (error) {

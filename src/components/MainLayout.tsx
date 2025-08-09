@@ -9,11 +9,7 @@ import {
   Settings, 
   HelpCircle,
   CreditCard,
-  BarChart3,
-  Zap,
-  Users,
-  Shuffle,
-  LayoutGrid
+  Zap
 } from "lucide-react";
 
 const MainLayout = () => {
@@ -28,12 +24,6 @@ const MainLayout = () => {
       isActive: currentPath === "/app" || currentPath === "/app/create-post"
     },
     {
-      name: "Dashboard",
-      icon: BarChart3,
-      path: "/app/dashboard",
-      isActive: currentPath === "/app/dashboard"
-    },
-    {
       name: "Lead Magnet AI",
       icon: Magnet,
       path: "/app/lead-magnet-ai",
@@ -46,12 +36,6 @@ const MainLayout = () => {
       isActive: currentPath === "/app/insights"
     },
     {
-      name: "Templates",
-      icon: LayoutGrid,
-      path: "/app/templates",
-      isActive: currentPath === "/app/templates"
-    },
-    {
       name: "Post Library",
       icon: FileText,
       path: "/app/library",
@@ -62,18 +46,6 @@ const MainLayout = () => {
       icon: Calendar,
       path: "/app/calendar",
       isActive: currentPath === "/app/calendar"
-    },
-    {
-      name: "Integrations",
-      icon: Shuffle,
-      path: "/app/integrations",
-      isActive: currentPath === "/app/integrations"
-    },
-    {
-      name: "Community",
-      icon: Users,
-      path: "/app/community",
-      isActive: currentPath === "/app/community"
     },
     {
       name: "Settings",
@@ -90,22 +62,27 @@ const MainLayout = () => {
   ];
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-gradient-to-br from-white via-[#f5faff] to-[#eaf2ff] overflow-hidden">
       {/* Left Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
+      <div className="w-64 bg-white/80 backdrop-blur-sm border-r border-blue-200/50 flex flex-col relative">
+        {/* Subtle gradient background for sidebar */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-[#f5faff]/50 to-[#eaf2ff]/30 pointer-events-none" />
+        
         {/* Brand Logo */}
-        <div className="p-6 border-b border-gray-200">
+        <div className="relative z-10 p-6 border-b border-blue-200/30">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#C3BEEF] to-[#81A4F7] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">R</span>
+            <div className="w-10 h-10 bg-gradient-to-br from-[#2563eb] to-[#38b6ff] rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-xl">R</span>
             </div>
-            <span className="text-xl font-semibold text-gray-900">Repic AI</span>
+            <div>
+              <span className="text-xl font-extrabold text-gray-900" style={{ fontFamily: 'Inter, Poppins, sans-serif' }}>Repic AI</span>
+              <p className="text-xs text-gray-500 mt-0.5">Instagram Content Studio</p>
+            </div>
           </div>
-          <p className="text-xs text-gray-500 mt-1">Instagram Content Studio</p>
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 p-4 overflow-y-auto">
+        <nav className="flex-1 p-4 overflow-y-auto relative z-10 scrollbar-thin scrollbar-thumb-blue-200 scrollbar-track-transparent">
           <ul className="space-y-2">
             {navigationItems.map((item) => {
               const Icon = item.icon;
@@ -113,17 +90,19 @@ const MainLayout = () => {
                 <li key={item.path}>
                   <Link
                     to={item.path}
-                    className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors duration-200 ${
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
                       item.isActive
-                        ? "bg-[#C3BEEF] text-white"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "bg-gradient-to-r from-[#2563eb] to-[#38b6ff] text-white shadow-lg"
+                        : "text-gray-700 hover:bg-white/70 hover:shadow-md"
                     }`}
                   >
                     <Icon 
                       size={20} 
-                      className={item.isActive ? "text-white" : "text-gray-500"}
+                      className={`${item.isActive ? "text-white" : "text-gray-500 group-hover:text-[#2563eb]"} transition-colors duration-200`}
                     />
-                    <span className="font-medium">{item.name}</span>
+                    <span className={`font-semibold ${item.isActive ? "text-white" : "group-hover:text-gray-900"} transition-colors duration-200`}>
+                      {item.name}
+                    </span>
                   </Link>
                 </li>
               );
@@ -132,27 +111,34 @@ const MainLayout = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="relative z-10 p-4 border-t border-blue-200/30">
           {/* Credit Counter */}
-          <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <CreditCard size={16} />
-              <span>774 credits remaining</span>
+          <div className="mb-4 p-4 bg-white/70 backdrop-blur-sm rounded-xl border border-blue-200/30 shadow-sm">
+            <div className="flex items-center space-x-3 text-sm text-gray-700">
+              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                <CreditCard size={16} className="text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900">774 credits</p>
+                <p className="text-xs text-gray-500">remaining</p>
+              </div>
             </div>
           </div>
 
           {/* Get More Credits Button */}
           <Button 
-            className="w-full bg-gradient-to-r from-[#C3BEEF] to-[#81A4F7] hover:from-[#B8B3E6] hover:to-[#7B9EF5] text-white font-medium py-2 px-4 rounded-lg transition-all duration-200"
+            className="w-full bg-gradient-to-r from-[#2563eb] to-[#38b6ff] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
           >
-            Get more Credits
+            Get More Credits
           </Button>
         </div>
       </div>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Outlet />
+        <div className="flex-1 overflow-y-auto">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

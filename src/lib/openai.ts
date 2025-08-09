@@ -1,7 +1,14 @@
 import OpenAI from 'openai';
 
+// Check if API key is available
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
+if (!apiKey) {
+  console.error('OpenAI API key is not configured. Please set VITE_OPENAI_API_KEY in your environment variables.');
+}
+
 const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  apiKey: apiKey,
   dangerouslyAllowBrowser: true
 });
 
@@ -21,9 +28,18 @@ export interface GeneratedPost {
 export class OpenAIService {
   static async generateTopicSuggestions(category: string, customTopic?: string): Promise<TopicSuggestion[]> {
     try {
+      // Check API key before making request
+      if (!apiKey) {
+        throw new Error('OpenAI API key is not configured. Please add VITE_OPENAI_API_KEY to your environment variables.');
+      }
+
+      console.log('Generating topics for category:', category, 'with custom topic:', customTopic);
+
       const prompt = customTopic 
         ? `Generate 8 specific and engaging Instagram post topics about "${customTopic}" in the "${category}" category. Each topic should be specific, actionable, and optimized for Instagram engagement with reels, stories, and posts.`
         : `Generate 8 engaging Instagram post topics for the "${category}" category. Make them specific, actionable, and optimized for Instagram engagement including reels, stories, and carousel posts.`;
+
+      console.log('OpenAI prompt:', prompt);
 
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
@@ -42,22 +58,40 @@ export class OpenAIService {
       });
 
       const content = response.choices[0]?.message?.content?.trim();
+      console.log('OpenAI response:', content);
+
       if (!content) throw new Error('No response from OpenAI');
 
       // Try to parse JSON response
       try {
         const topics = JSON.parse(content);
+        console.log('Parsed topics:', topics);
         return Array.isArray(topics) ? topics : [];
-      } catch {
+      } catch (parseError) {
+        console.log('JSON parsing failed, using fallback parsing');
         // Fallback: parse manually if not JSON
         const lines = content.split('\n').filter(line => line.trim());
-        return lines.slice(0, 8).map((line: string, index: number) => ({
+        const fallbackTopics = lines.slice(0, 8).map((line: string, index: number) => ({
           title: line.replace(/^\d+\.?\s*/, '').replace(/^-\s*/, '').trim()
         }));
+        console.log('Fallback topics:', fallbackTopics);
+        return fallbackTopics;
       }
     } catch (error) {
       console.error('Error generating topic suggestions:', error);
-      return [];
+      
+      // Provide more specific error messages
+      if (error instanceof Error) {
+        if (error.message.includes('API key')) {
+          throw new Error('OpenAI API key is not configured. Please add your OpenAI API key to the environment variables.');
+        } else if (error.message.includes('insufficient_quota')) {
+          throw new Error('OpenAI API quota exceeded. Please check your OpenAI account billing.');
+        } else if (error.message.includes('invalid_api_key')) {
+          throw new Error('Invalid OpenAI API key. Please check your API key configuration.');
+        }
+      }
+      
+      throw new Error('Failed to generate topics. Please try again or check your OpenAI configuration.');
     }
   }
 
@@ -67,6 +101,11 @@ export class OpenAIService {
     tone: string
   ): Promise<GeneratedPost> {
     try {
+      // Check API key before making request
+      if (!apiKey) {
+        throw new Error('OpenAI API key is not configured. Please add VITE_OPENAI_API_KEY to your environment variables.');
+      }
+
       const toneInstructions = {
         "Educational": "informative, educational, and value-driven",
         "Entertainment": "fun, engaging, and entertaining", 
@@ -141,6 +180,17 @@ Return ONLY a JSON object with this structure:
       }
     } catch (error) {
       console.error('Error generating Instagram post:', error);
+      
+      if (error instanceof Error) {
+        if (error.message.includes('API key')) {
+          throw new Error('OpenAI API key is not configured. Please add your OpenAI API key to the environment variables.');
+        } else if (error.message.includes('insufficient_quota')) {
+          throw new Error('OpenAI API quota exceeded. Please check your OpenAI account billing.');
+        } else if (error.message.includes('invalid_api_key')) {
+          throw new Error('Invalid OpenAI API key. Please check your API key configuration.');
+        }
+      }
+      
       throw new Error('Failed to generate post. Please try again.');
     }
   }
@@ -150,6 +200,11 @@ Return ONLY a JSON object with this structure:
     additionalInstructions: string
   ): Promise<GeneratedPost> {
     try {
+      // Check API key before making request
+      if (!apiKey) {
+        throw new Error('OpenAI API key is not configured. Please add VITE_OPENAI_API_KEY to your environment variables.');
+      }
+
       const prompt = `Take this Instagram content and modify it based on the additional instructions:
 
 Original Content:
@@ -202,6 +257,13 @@ Return ONLY a JSON object with this structure:
       };
     } catch (error) {
       console.error('Error regenerating post:', error);
+      
+      if (error instanceof Error) {
+        if (error.message.includes('API key')) {
+          throw new Error('OpenAI API key is not configured. Please add your OpenAI API key to the environment variables.');
+        }
+      }
+      
       throw new Error('Failed to regenerate post. Please try again.');
     }
   }

@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
+# Persona Pulse Studio - Instagram Content Creation Platform
 
-## Project info
+An AI-powered Instagram content creation platform that helps you generate engaging posts, scripts, and lead magnets.
 
-**URL**: https://lovable.dev/projects/f3e4ab89-1478-4c04-ac7e-d980216a8799
+## Features
 
-## How can I edit this code?
+- **Instagram Content Creation**: Generate posts, captions, and hashtags optimized for Instagram
+- **Script Writing**: Create compelling scripts for Instagram Reels and Stories with powerful hooks
+- **Lead Magnet Generation**: Design irresistible lead magnets to grow your Instagram audience
+- **AI-Powered**: Uses OpenAI GPT-4 for intelligent content generation
+- **Professional Formatting**: Clean, emoji-free content with proper spacing and structure
 
-There are several ways of editing your application.
+## Setup Instructions
 
-**Use Lovable**
+### 1. Environment Variables
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f3e4ab89-1478-4c04-ac7e-d980216a8799) and start prompting.
+Create a `.env` file in the root directory and add your OpenAI API key:
 
-Changes made via Lovable will be committed automatically to this repo.
+```env
+VITE_OPENAI_API_KEY=your_openai_api_key_here
+```
 
-**Use your preferred IDE**
+To get an OpenAI API key:
+1. Go to [OpenAI API](https://platform.openai.com/api-keys)
+2. Sign up or log in to your account
+3. Create a new API key
+4. Copy the key and paste it in your `.env` file
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 2. Install Dependencies
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+npm install
+```
 
-Follow these steps:
+### 3. Run the Development Server
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 4. Build for Production
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run build
+```
 
-**Use GitHub Codespaces**
+## Content Categories
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The platform supports three main content categories:
 
-## What technologies are used for this project?
+1. **Script Writing**: Perfect for Instagram Reels and Stories - includes hooks and full scripts
+2. **Post Writing**: Engaging Instagram posts optimized for feed and carousel content  
+3. **Lead Magnet**: Content designed to capture leads and grow your Instagram audience
 
-This project is built with:
+## Content Tones
 
-- Vite
+Choose from various content tones:
+- Educational
+- Entertainment
+- Inspirational
+- Behind-the-scenes
+- Storytelling
+
+## Features Overview
+
+- **AI Topic Suggestions**: Get AI-generated topic ideas based on your category
+- **Custom Topics**: Use your own topics for content generation
+- **Hook Generation**: Compelling opening lines for maximum engagement
+- **Video Scripts**: Full scripts for Reels and Stories
+- **Hashtag Optimization**: 8-12 relevant hashtags (mix of popular and niche)
+- **Call-to-Action**: Clear CTAs to drive engagement
+- **Professional Formatting**: Clean, well-structured content without emojis
+
+## Tech Stack
+
+- React 18
 - TypeScript
-- React
-- shadcn-ui
+- Vite
 - Tailwind CSS
+- Radix UI Components
+- OpenAI API
+- React Router
+- Lucide Icons
 
-## How can I deploy this project?
+## Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/f3e4ab89-1478-4c04-ac7e-d980216a8799) and click on Share -> Publish.
+```
+src/
+├── components/     # Reusable UI components
+├── pages/         # Application pages
+├── lib/           # Utilities and services
+├── hooks/         # Custom React hooks
+└── assets/        # Static assets
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Contributing
 
-Yes, you can!
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License.

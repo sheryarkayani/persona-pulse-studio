@@ -139,6 +139,22 @@ const CreatePost = () => {
     }
   };
 
+  const testOpenAIConnection = async () => {
+    try {
+      const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+      if (!apiKey) {
+        toast.error("OpenAI API key is not configured. Please add VITE_OPENAI_API_KEY to your .env file");
+        return;
+      }
+      
+      toast.success(`OpenAI API key is configured (${apiKey.substring(0, 10)}...)`);
+      console.log('OpenAI API Key (first 10 chars):', apiKey.substring(0, 10));
+    } catch (error) {
+      console.error('OpenAI connection test failed:', error);
+      toast.error("Failed to test OpenAI connection");
+    }
+  };
+
   return (
     <div className="flex h-full">
       {/* Main Content Area */}
@@ -147,6 +163,24 @@ const CreatePost = () => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Create Instagram Content</h1>
           <p className="text-gray-600 mt-2">Generate engaging Instagram posts, scripts, and lead magnets</p>
+          
+          {/* Debug section - remove this after testing */}
+          <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <h3 className="text-sm font-medium text-blue-900 mb-2">Debug Tools</h3>
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={testOpenAIConnection}
+                className="text-blue-600 border-blue-300"
+              >
+                Test OpenAI Connection
+              </Button>
+              <span className="text-xs text-blue-600 flex items-center">
+                API Key: {import.meta.env.VITE_OPENAI_API_KEY ? '✓ Configured' : '✗ Missing'}
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Form Sections */}
